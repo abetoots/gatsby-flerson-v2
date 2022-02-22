@@ -1,0 +1,18 @@
+query GET_POSTS_BY_TAG(
+  $tag: String!
+  $taxonomy: TaxonomyEnum!
+  $fieldType: RootQueryToJobPostConnectionWhereArgsTaxQueryField!
+) {
+  jobPosts(
+    where: {
+      taxQuery: {
+        taxArray: { taxonomy: $taxonomy, field: $fieldType, terms: [$tag] }
+      }
+    }
+  ) {
+    nodes {
+      id
+      databaseId
+    }
+  }
+}

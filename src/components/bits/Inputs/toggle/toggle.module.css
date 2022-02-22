@@ -1,0 +1,32 @@
+@charset "UTF-8";
+.Toggle__input {
+  cursor: pointer;
+  position: relative;
+  -moz-appearance: none;
+       appearance: none;
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 5px;
+  border: 1.5px solid #ededed;
+  outline: none;
+  vertical-align: middle;
+  font-size: 1rem;
+  margin: 0 5px;
+  -webkit-appearance: none;
+}
+
+.Toggle__input:checked {
+  background-color: #a4eea4;
+}
+
+.Toggle__input:checked::after {
+  content: '✔️';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+          transform: translateX(-50%) translateY(-50%);
+  font-size: inherit;
+}
+/*# sourceMappingURL=toggle.module.css.map */

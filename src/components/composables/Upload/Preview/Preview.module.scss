@@ -1,0 +1,13 @@
+.Preview {
+    width: 100px;
+    height: 100px;
+    padding: .7em;
+
+    &__image {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+    }
+
+}

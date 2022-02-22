@@ -1,0 +1,98 @@
+.FormInput {
+    $lineHeight: 1px;
+    $self: &;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+
+    &__label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+        color: rgb(39, 39, 39);
+    }
+
+    &__description {
+        font-size: .8em;
+        color: rgb(129, 129, 129);
+        font-style: italic;
+    }
+
+    &__inputWrap {
+        position: relative;
+        padding: 10px 0;
+
+        &._withIcon {
+            #{$self}__inputEl {
+                padding: 10px 35px;
+            }
+        }
+
+        &._focused {
+            #{$self}__icon {
+                color: #6896E0;
+            }
+        }
+    }
+
+    &__defaultInput {
+        border: none;
+        background-color: #fff;
+        font: inherit;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+
+        &:disabled {
+            cursor: not-allowed;
+        }
+
+        //we handle visual focus through our defaultInputLine
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__defaultInputLine {
+        background-color: #dadce0;
+        width: 100%;
+        height: $lineHeight;
+        position: absolute;
+        bottom: 0;
+        transition: all .3s ease;
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: calc(#{$lineHeight} * 2);
+            background-color: #6896E0;
+            transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: scaleX(0);
+        }
+
+        &._focused {
+            &::after {
+                transform: scaleX(1);
+            }
+        }
+
+
+    }
+
+    &__icon {
+        color: rgb(112, 117, 122);
+
+        &._inside {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 2;
+            transition: all .3s ease;
+        }
+    }
+
+}

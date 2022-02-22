@@ -1,0 +1,17 @@
+.RichEditor {
+    width: 100%;
+    padding: 10px;
+
+    &__label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 8px;
+        color: rgb(39, 39, 39);
+    }
+
+    &__editorWrap {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+}

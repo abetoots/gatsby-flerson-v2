@@ -1,0 +1,27 @@
+.Header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 0;
+
+    &__logo {
+        margin: 0;
+        @include fluid-type(320px, 1440px, 80px, 110px, 'width')
+    }
+
+    &__postJobButton {
+        padding: 10px 15px;
+        border: 2px solid v(theme-primary-color);
+        border-radius: 5px;
+        background-color: transparent;
+        transition: all .3s ease;
+        font-weight: bolder;
+        text-transform: uppercase;
+        outline: rgb(22, 114, 199);
+
+        &:hover {
+            background-color: v(theme-primary-color);
+        }
+    }
+
+}

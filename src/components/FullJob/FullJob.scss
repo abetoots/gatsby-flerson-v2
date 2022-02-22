@@ -1,0 +1,127 @@
+.FullJob {
+    height: 100%;
+    margin: 0 .5em;
+    padding: .5em;
+    border-radius: 3px;
+    box-shadow: 5px 2px 10px 5px rgb(231, 231, 231);
+    min-height: 80vh;
+
+    & h1,
+    & h2,
+    & h3 {
+        margin: 0;
+    }
+
+    &__head {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+        gap: 5px;
+        margin-bottom: 2rem;
+    }
+
+    &__imageWrap,
+    &__initialsWrap {
+        width: 200px;
+        height: 200px;
+        padding: .7rem;
+    }
+
+    &__headDetails {
+        display: flex;
+        flex-flow: column;
+
+        @include media-query($medium-up) {
+            justify-content: space-around;
+            align-items: center;
+            flex-flow: row;
+        }
+    }
+
+    &__employerUrl {
+        color: inherit;
+
+        &:visited {
+            color: black;
+        }
+    }
+
+    &__placeholder {
+        color: rgba(238, 197, 150, 0.767);
+        font-size: 2em;
+        font-weight: bold;
+    }
+
+    &__tags {
+        @include media-query($small) {
+            order: 4;
+            grid-column: 2 / 3;
+            font-size: .6em;
+        }
+
+        font-size: .8em;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    &__tag {
+        display: inline-block;
+        text-transform: uppercase;
+        border: 2px solid black;
+        padding: 0 4px;
+        margin: 5px;
+        background-color: white;
+
+        &:hover {
+            background-color: v(theme-bg-2);
+        }
+
+        &._primary {
+            &:hover {
+                background-color: black;
+                color: white;
+            }
+        }
+    }
+
+    &__applyButton {
+        @include media-query($small) {
+            order: 3;
+            grid-column: 1 / 2;
+        }
+
+        cursor: pointer;
+        display: inline-block;
+        z-index: 2;
+
+        width: 100%;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: inherit;
+        font-weight: bold;
+        border: 2px solid v(theme-primary-color);
+        background-color: v(theme-primary-color);
+        padding: 10px;
+        margin: 0 auto;
+        text-align: center;
+        transition: all .3s ease;
+
+        &:hover {
+            background-color: white;
+            font-size: 1.4em;
+        }
+
+        &:visited {
+            color: black;
+        }
+    }
+
+    &__description {
+        padding: 1rem;
+        margin: 0 auto;
+
+        @include media-query($medium-up) {
+            max-width: 80%;
+        }
+    }
+}

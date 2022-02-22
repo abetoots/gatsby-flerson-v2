@@ -1,0 +1,32 @@
+.NotFound404 {
+    display: flex;
+    flex-flow: column;
+
+    &__image {
+        z-index: 1;
+        min-height: 100vh;
+        opacity: .9;
+    }
+
+    &__message {
+        z-index: 2;
+    }
+
+    &__link {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        border: 2px solid #000;
+        color: #fff;
+        background-color: #000;
+        border-radius: 5px;
+        width: max-content;
+        transition: all .3s ease;
+        margin: 10px auto;
+
+        &:hover {
+            background-color: transparent;
+            color: #000;
+        }
+    }
+}

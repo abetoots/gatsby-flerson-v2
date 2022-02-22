@@ -1,0 +1,13 @@
+.Upload {
+    position: relative;
+
+    &__input {
+        @include visually-hidden;
+    }
+
+    &__description {
+        font-size: .8em;
+        color: rgb(129, 129, 129);
+    }
+
+}

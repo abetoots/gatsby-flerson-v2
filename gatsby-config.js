@@ -1,3 +1,9 @@
+const path = require("path");
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
 module.exports = {
   siteMetadata: {
     title: `Remote Job Board | Flerson`,
@@ -12,14 +18,15 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-        //When using data, it is recommended that you use this.
-        includePaths: [
-          path.resolve(__dirname, "src/sass/util/_variables.scss"),
-          path.resolve(__dirname, "src/sass/tools/_functions.scss"),
-          path.resolve(__dirname, "src/sass/tools/_mixins.scss"),
-        ],
+        sassOptions: {
+          includePaths: [
+            path.resolve(__dirname, "src/sass/util/_variables.scss"),
+            path.resolve(__dirname, "src/sass/tools/_functions.scss"),
+            path.resolve(__dirname, "src/sass/tools/_mixins.scss"),
+          ],
+        },
         //only variables and mixins to avoid duplicating
-        data: `
+        additionalData: `
             @import "./src/sass/util/variables";
             @import "./src/sass/tools/functions";
             @import "./src/sass/tools/mixins";
@@ -58,6 +65,29 @@ module.exports = {
       },
     },
     "gatsby-plugin-netlify",
+    "gatsby-plugin-graphql-loader",
+    {
+      resolve: `gatsby-source-mongodb`,
+      options: {
+        dbName: `engine`,
+        collection: [`jobs`],
+        server: {
+          address: "cluster0-shard-00-01.lmx4n.mongodb.net",
+          port: 27017,
+        },
+        auth: {
+          user: process.env.MONGODB_USERNAME,
+          password: process.env.MONGODB_PASS,
+        },
+        extraParams: {
+          replicaSet: "atlas-m3njxt-shard-0",
+          authSource: "admin",
+          ssl: true,
+          retryWrites: true,
+          w: "majority",
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {

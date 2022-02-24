@@ -1,0 +1,14 @@
+{
+  "exclude": ["build", "dist"],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@Images/*": ["./src/images/*"],
+      "@Components/*": ["./src/components/*"],
+      "@Core/*": ["./src/core/*"],
+      "@Hoc/*": ["./src/hoc/*"],
+      "@Index/*": ["./src/*"],
+      "@Shared/*": ["src/shared/*"]
+    }
+  }
+}

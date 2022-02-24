@@ -1,11 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
 import "./FullJob.scss";
 
 //Components
 import Tags from "@Components/bits/Tags/Tags";
-import JobImage from "@Components/JobImage/JobImage";
 import JobApplyButton from "@Components/JobApplyButton/JobApplyButton";
+import JobImage from "@Components/JobImage/JobImage";
+import PropTypes from "prop-types";
+import React from "react";
 
 const FullJob = (props) => {
   let initials;

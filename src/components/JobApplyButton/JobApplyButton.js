@@ -1,11 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-
 //Components
 import Button from "@Components/bits/Button/Button";
-
 //Misc
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React from "react";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

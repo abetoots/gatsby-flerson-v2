@@ -1,23 +1,23 @@
-import React, { useMemo, useCallback } from "react"
-import PropTypes from "prop-types"
 import "./RichEditor.scss"
 
-//Components
-import Toolbar from "./Toolbar/Toolbar"
-import BlockButton from "./BlockButton/BlockButton"
-import MarkButton from "./MarkButton/MarkButton"
 import H1 from "@Images/h1.inline.svg"
 import H2 from "@Images/h2.inline.svg"
 import H3 from "@Images/h3.inline.svg"
 import H4 from "@Images/h4.inline.svg"
-
+import isHotkey from "is-hotkey"
+import PropTypes from "prop-types"
+import React, { useCallback,useMemo } from "react"
 //Misc
 // Import the Slate editor factory.
 import { createEditor } from "slate"
 // Import the Slate components and React plugin.
-import { Slate, Editable, withReact } from "slate-react"
+import { Editable, Slate, withReact } from "slate-react"
+
+import BlockButton from "./BlockButton/BlockButton"
+import MarkButton from "./MarkButton/MarkButton"
 import { toggleMark } from "./MarkButton/MarkButton"
-import isHotkey from "is-hotkey"
+//Components
+import Toolbar from "./Toolbar/Toolbar"
 
 const HOTKEYS = {
   "mod+b": "bold",

@@ -1,14 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./BlockButton.module.scss";
-
 //Components
 import Button from "@Components/bits/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import PropTypes from "prop-types";
+import React from "react";
 //Misc
 import { Editor, Transforms } from "slate";
 import { useSlate } from "slate-react";
+
+import * as styles from "./BlockButton.module.scss";
 
 const LIST_TYPES = ["numbered-list", "bulleted-list"];
 

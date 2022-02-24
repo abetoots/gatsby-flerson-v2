@@ -1,6 +1,7 @@
-import React from "react";
 import PropTypes from "prop-types";
-import styles from "./swatch.module.scss";
+import React from "react";
+
+import * as styles from "./swatch.module.scss";
 
 const Swatch = ({ color, handleClick }) => {
   return (

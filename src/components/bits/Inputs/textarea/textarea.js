@@ -1,6 +1,7 @@
-import React from "react"
-import PropTypes from "prop-types"
 import "./textarea.scss"
+
+import PropTypes from "prop-types"
+import React from "react"
 
 const TextArea = props => {
   return (

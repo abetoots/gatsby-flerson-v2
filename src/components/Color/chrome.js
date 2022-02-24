@@ -1,6 +1,7 @@
-import React, { useState } from "react";
 import PropTypes from "prop-types";
+import React, { useState } from "react";
 import { ChromePicker } from "react-color";
+
 import Swatch from "./swatch/swatch";
 
 const ChromeSwatchPicker = ({ color, onChangeComplete }) => {

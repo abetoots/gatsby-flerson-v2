@@ -1,6 +1,7 @@
+import { fireEvent,render } from "@testing-library/react";
 import React from "react";
+
 import Focus from "./Focus";
-import { render, fireEvent } from "@testing-library/react";
 
 describe("Focus", () => {
   it("focuses its child on keyboard only if given the right prop", () => {

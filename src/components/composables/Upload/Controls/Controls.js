@@ -1,12 +1,11 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./Controls.module.scss";
-
 //Component
 import Button from "@Components/bits/Button/Button";
-
 //Misc
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React from "react";
+
+import * as styles from "./Controls.module.scss";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
-
-import { exposeStyles } from "@Shared/api/styles";
 import Focus from "@Components/hoc/Focus/Focus";
+import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

@@ -1,8 +1,8 @@
-import React from "react"
 import "./NotFound404.scss"
 
 //Components
 import { Link } from "gatsby"
+import React from "react"
 
 //Misc
 import img from "./404-cat.svg"

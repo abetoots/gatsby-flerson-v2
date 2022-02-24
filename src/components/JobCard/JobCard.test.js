@@ -1,6 +1,7 @@
-import React from "react"
-import JobCard from "./JobCard"
 import { render } from "@testing-library/react"
+import React from "react"
+
+import JobCard from "./JobCard"
 
 describe("JobCard", () => {
   it('finds an "apply" anchor link and the correct details are visible to the user', () => {

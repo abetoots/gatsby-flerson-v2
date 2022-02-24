@@ -1,19 +1,17 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
-import styles from "./FormInput.module.scss";
-
 //Components
 import Checkbox from "@Components/bits/Inputs/checkbox/checkbox";
+import Input from "@Components/bits/Inputs/Input";
 import Select from "@Components/bits/Inputs/select/select";
 import Textarea from "@Components/bits/Inputs/textarea/textarea";
 import Toggle from "@Components/bits/Inputs/toggle/toggle";
 import Upload from "@Components/composables/Upload/Upload";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import file from "./paper.svg";
-import Input from "@Components/bits/Inputs/Input";
-
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React, { useRef } from "react";
+
+import * as styles from "./FormInput.module.scss";
+import file from "./paper.svg";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

@@ -1,14 +1,15 @@
-import React, { useState } from "react"
-import PropTypes from "prop-types"
-import styles from "./toggle.module.scss"
+import PropTypes from "prop-types";
+import React, { useState } from "react";
 
-const Toggle = props => {
-  const { Toggle, Toggle__input, _focused = "_focused" } = styles
-  const [isFocused, setIsFocused] = useState(false)
+import * as styles from "./toggle.module.scss";
 
-  let rootClass = Toggle
+const Toggle = (props) => {
+  const { Toggle, Toggle__input, _focused = "_focused" } = styles;
+  const [isFocused, setIsFocused] = useState(false);
+
+  let rootClass = Toggle;
   if (isFocused) {
-    rootClass = `${rootClass} ${_focused}`
+    rootClass = `${rootClass} ${_focused}`;
   }
 
   /**
@@ -17,18 +18,18 @@ const Toggle = props => {
    * @param {Event} event The Event object
    * @param {Function} handler Handler function returned by a custom hook from props.registerState
    */
-  const toggleHandler = event => {
+  const toggleHandler = (event) => {
     //if toggle is about to be checked
     if (event.target.checked) {
-      props.stateHandler(true)
+      props.stateHandler(true);
     } else {
-      props.stateHandler(false)
+      props.stateHandler(false);
     }
-  }
+  };
 
   //Focus handler that determines if this element should be focused 'normally' or on keyboard users only
   //@Watch: We handle it manually until :focus-visible is supported fully
-  const focusHandler = e => {
+  const focusHandler = (e) => {
     //Handles keyboard focus only behavior
     if (props.keyBoardFocusOnly) {
       if (e.type === "keyup") {
@@ -36,22 +37,22 @@ const Toggle = props => {
         //if key code is tab
         if (e.keyCode === 9) {
           //should focus
-          setIsFocused(true)
+          setIsFocused(true);
         }
       } else if (e.type === "blur") {
         //this will be the blur event
-        setIsFocused(false)
+        setIsFocused(false);
       }
     } else {
       //Handles normal focus behavior
       if (e.type === "focus") {
-        setIsFocused(true)
+        setIsFocused(true);
       } else if (e.type === "blur") {
         //this will be the blur event
-        setIsFocused(false)
+        setIsFocused(false);
       }
     }
-  }
+  };
 
   return (
     <div className={rootClass}>
@@ -66,12 +67,12 @@ const Toggle = props => {
         aria-labelledby={props.ariaLabelledBy}
       />
     </div>
-  )
-}
+  );
+};
 
 Toggle.defaultProps = {
   keyBoardFocusOnly: false,
-}
+};
 
 Toggle.propTypes = {
   ariaLabelledBy: PropTypes.string,
@@ -79,6 +80,6 @@ Toggle.propTypes = {
   keyBoardFocusOnly: PropTypes.bool,
   state: PropTypes.bool.isRequired,
   stateHandler: PropTypes.func.isRequired,
-}
+};
 
-export default Toggle
+export default Toggle;

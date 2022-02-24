@@ -1,14 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./JobCard.module.scss";
-
 //Components
 import Tags from "@Components/bits/Tags/Tags";
-import JobImage from "@Components/JobImage/JobImage";
-import JobApplyButton from "@Components/JobApplyButton/JobApplyButton";
-
-import { navigate } from "gatsby";
 import Focus from "@Components/hoc/Focus/Focus";
+import JobApplyButton from "@Components/JobApplyButton/JobApplyButton";
+import JobImage from "@Components/JobImage/JobImage";
+import { navigate } from "gatsby";
+import PropTypes from "prop-types";
+import React from "react";
+
+import * as styles from "./JobCard.module.scss";
 
 const JobCard = (props) => {
   const navigateHandler = (e) => {
@@ -56,13 +55,13 @@ const JobCard = (props) => {
         role="link"
         style={rootStyle}
       >
-        <JobImage
+        {/* <JobImage
           showImage={props.showImage}
           isPreview={props.isPreview}
           initials={initials}
           image={props.image}
           alt={`logo of ${props.companyName}`}
-        />
+        /> */}
 
         <div>
           <h3 className={styles.JobCard__companyName}>{companyName}</h3>

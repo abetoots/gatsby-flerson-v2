@@ -1,14 +1,12 @@
-import React from "react";
 import "./Header.scss";
 
-import { Link } from "gatsby";
-
+import Button from "@Components/bits/Button/Button";
 //Components
 import Logo from "@Components/bits/Logo/Logo";
-import Button from "@Components/bits/Button/Button";
-
 //Misc
 import logo from "@Images/flerson-logo.svg";
+import { Link } from "gatsby";
+import React from "react";
 
 const Header = () => {
   return (

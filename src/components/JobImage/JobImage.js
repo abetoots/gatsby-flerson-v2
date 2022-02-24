@@ -1,11 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./JobImage.module.scss";
-
-import Img from "gatsby-image";
 import Preview from "@Components/composables/Upload/Preview/Preview";
-
 import { exposeStyles } from "@Shared/api/styles";
+import { GatsbyImage } from "gatsby-plugin-image";
+import PropTypes from "prop-types";
+import React from "react";
+
+import * as styles from "./JobImage.module.scss";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.
@@ -38,7 +37,7 @@ const JobImage = (props) => {
     } else if (props.image.fluid) {
       image = (
         <div className={classes.wrap}>
-          <Img
+          <GatsbyImage
             style={{ borderRadius: "8px" }}
             fluid={props.image.fluid}
             alt={props.alt}
@@ -48,7 +47,7 @@ const JobImage = (props) => {
     } else if (props.image.fixed) {
       image = (
         <div className={classes.wrap}>
-          <Img fixed={props.image.fixed} alt={props.alt} />
+          <GatsbyImage fixed={props.image.fixed} alt={props.alt} />
         </div>
       );
     }

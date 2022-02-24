@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
-
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React, { useRef } from "react";
 
 const useStyles = exposeStyles({
   merge: {

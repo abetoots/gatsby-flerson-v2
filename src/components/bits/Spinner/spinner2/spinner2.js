@@ -1,5 +1,6 @@
-import React from "react";
 import "./spinner2.css";
+
+import React from "react";
 
 const Spinner2 = (props) => (
   <div className="sk-cube-grid">

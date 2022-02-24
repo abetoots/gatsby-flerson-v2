@@ -1,14 +1,13 @@
-import React from "react";
-import PropTypes from "prop-types";
-import styles from "./MarkButton.module.scss";
-
 //Components
 import Button from "@Components/bits/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import PropTypes from "prop-types";
+import React from "react";
 //Misc
 import { Editor } from "slate";
 import { useSlate } from "slate-react";
+
+import * as styles from "./MarkButton.module.scss";
 
 const MarkButton = ({ format, icon }) => {
   //get the editor in context

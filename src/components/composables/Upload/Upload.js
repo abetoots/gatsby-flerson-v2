@@ -1,14 +1,13 @@
-import React, { useRef } from "react";
-import PropTypes from "prop-types";
-import styles from "./Upload.module.scss";
-
-//Components
-import Preview from "./Preview/Preview";
-import Choose from "./Controls/choose";
-import Remove from "./Controls/remove";
-
 //Misc
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React, { useRef } from "react";
+
+import Choose from "./Controls/choose";
+import Remove from "./Controls/remove";
+//Components
+import Preview from "./Preview/Preview";
+import * as styles from "./Upload.module.scss";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

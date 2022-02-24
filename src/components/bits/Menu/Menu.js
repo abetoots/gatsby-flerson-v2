@@ -1,12 +1,11 @@
-import React, { forwardRef } from "react";
+//Misc
+import { exposeStyles } from "@Shared/api/styles";
 import PropTypes from "prop-types";
-import styles from "./Menu.module.scss";
+import React, { forwardRef } from "react";
 
 //Components
 import ListItem from "./ListItem/ListItem";
-
-//Misc
-import { exposeStyles } from "@Shared/api/styles";
+import * as styles from "./Menu.module.scss";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

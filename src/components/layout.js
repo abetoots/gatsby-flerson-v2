@@ -1,17 +1,15 @@
-import React from "react";
-import PropTypes from "prop-types";
 import "./layout.scss";
-
 import "@Shared/utils/fontawesome";
 import "@Shared/utils/typography";
 
+import Spinner2 from "@Components/bits/Spinner/spinner2/spinner2";
+import Footer from "@Components/Footer/Footer";
 //Components
 import Header from "@Components/Header/Header";
-import Footer from "@Components/Footer/Footer";
-import Spinner2 from "@Components/bits/Spinner/spinner2/spinner2";
-
 //Misc
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React from "react";
 
 const useStyles = exposeStyles({
   replace: {

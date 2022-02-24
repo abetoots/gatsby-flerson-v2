@@ -1,13 +1,14 @@
-import React from "react"
-import PropTypes from "prop-types"
-import styles from "./Toolbar.module.scss"
+import PropTypes from "prop-types";
+import React from "react";
 
-const Toolbar = props => {
-  return <div className={styles.Toolbar}>{props.children}</div>
-}
+import * as styles from "./Toolbar.module.scss";
+
+const Toolbar = (props) => {
+  return <div className={styles.Toolbar}>{props.children}</div>;
+};
 
 Toolbar.propTypes = {
   children: PropTypes.node.isRequired,
-}
+};
 
-export default Toolbar
+export default Toolbar;

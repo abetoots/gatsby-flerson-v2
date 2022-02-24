@@ -1,14 +1,13 @@
-import React, { forwardRef } from "react";
-import PropTypes from "prop-types";
-import styles from "./Form.module.scss";
-
 //Components
 import Button from "@Components/bits/Button/Button";
-import Status from "./UI/Status";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 //Misc
 import { exposeStyles } from "@Shared/api/styles";
+import PropTypes from "prop-types";
+import React, { forwardRef } from "react";
+
+import * as styles from "./Form.module.scss";
+import Status from "./UI/Status";
 
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.

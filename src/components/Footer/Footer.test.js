@@ -1,6 +1,7 @@
-import React from "react";
-import Footer from "./Footer";
 import { render } from "@testing-library/react";
+import React from "react";
+
+import Footer from "./Footer";
 
 describe("Footer", () => {
   it("finds a an attribution link to the icon author and link to Flaticon", () => {

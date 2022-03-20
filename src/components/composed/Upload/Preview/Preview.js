@@ -22,14 +22,8 @@ const Preview = (props) => {
   const classes = useStyles(props);
 
   let preview;
-  if (props.state.preview || props.state.url || props.placeholder) {
-    preview = (
-      <img
-        className={classes.image}
-        src={props.state.preview || props.state.url || props.placeholder}
-        alt="preview"
-      />
-    );
+  if (props.state.preview || props.state.url) {
+    preview = <img className={classes.image} src={props.state.preview || props.state.url} alt="preview" />;
   } else {
     preview = <span>No file chosen</span>;
   }
@@ -42,7 +36,6 @@ Preview.propTypes = {
     url: PropTypes.string.isRequired,
     preview: PropTypes.string.isRequired,
   }),
-  placeholder: PropTypes.string,
 };
 
 export default Preview;

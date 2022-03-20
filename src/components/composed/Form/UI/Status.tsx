@@ -1,5 +1,4 @@
 import { exposeStyles } from "@Shared/api/styles";
-import PropTypes from "prop-types";
 import React from "react";
 
 //STYLES API
@@ -8,11 +7,17 @@ import React from "react";
 //behavior: props.classes will MERGE with what you exposed when using MUI
 const useStyles = exposeStyles({
   replace: {
-    root: undefined,
+    root: "",
   },
 });
 
-const Status = (props) => {
+type StatusProps = React.PropsWithChildren<{
+  error?: boolean;
+  success?: boolean;
+  classes?: Partial<ReturnType<typeof useStyles>>;
+}>;
+
+const Status = (props: StatusProps) => {
   //Consume with props to return classes that are either merged or replaced depending on what you defined above
   const classes = useStyles(props);
 
@@ -31,12 +36,6 @@ const Status = (props) => {
       {props.children}
     </div>
   );
-};
-
-Status.propTypes = {
-  children: PropTypes.node.isRequired,
-  error: PropTypes.string.isRequired,
-  success: PropTypes.bool.isRequired,
 };
 
 export default Status;

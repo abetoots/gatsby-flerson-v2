@@ -1,0 +1,45 @@
+.InputLine {
+  $lineHeight: 1px;
+  border: none;
+  background-color: #fff;
+  font: inherit;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  //we handle visual focus through our defaultInputLine
+  &:focus {
+    outline: none;
+  }
+
+  &__line {
+    background-color: #dadce0;
+    width: 100%;
+    height: $lineHeight;
+    position: absolute;
+    bottom: 0;
+    transition: all 0.3s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: calc(#{$lineHeight} * 2);
+      background-color: #6896e0;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: scaleX(0);
+    }
+
+    &._focused {
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

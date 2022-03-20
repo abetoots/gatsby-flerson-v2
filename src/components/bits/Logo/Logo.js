@@ -4,8 +4,6 @@ import React from "react";
 
 import * as styles from "./Logo.module.scss";
 
-console.log("styles", styles);
-
 //STYLES API
 //Define which styles of the component you want to expose. Only what you expose can be overridden.
 
@@ -21,11 +19,7 @@ const Logo = (props) => {
   const classes = useStyles(props);
   return (
     <div className={styles.Logo}>
-      <img
-        className={classes.image}
-        src={props.src}
-        alt={props.alt ? `${props.alt}` : "Site Logo"}
-      />
+      <img className={classes.image} src={props.src} alt={props.alt ? `${props.alt}` : "Site Logo"} />
     </div>
   );
 };

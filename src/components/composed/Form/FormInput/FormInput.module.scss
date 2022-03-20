@@ -1,0 +1,24 @@
+.FormInput {
+  $lineHeight: 1px;
+  $self: &;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1.5rem;
+
+  &__description {
+    font-size: 0.8em;
+    color: rgb(129, 129, 129);
+    font-style: italic;
+  }
+
+  &__inputWrap {
+    position: relative;
+    padding: 10px 0;
+
+    &._focused {
+      #{$self}__icon {
+        color: #6896e0;
+      }
+    }
+  }
+}

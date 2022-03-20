@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 
-const Focus = ({ children, keyBoardOnly, focusClass, run }) => {
+//Focus handler that determines gives us flexibility on which elements should be focused 'normally' or on keyboard users only
+//@Watch: We handle it manually until :focus-visible is supported fully
+const Focus = ({ children, keyBoardOnly, applyClassName, run }) => {
   const focusHandler = (e) => {
     //Handles keyboard focus only behavior
     if (keyBoardOnly) {
@@ -11,8 +13,8 @@ const Focus = ({ children, keyBoardOnly, focusClass, run }) => {
         if (e.keyCode === 9) {
           //should focus
           e.target.focus();
-          if (focusClass) {
-            e.target.classList.add(focusClass);
+          if (applyClassName) {
+            e.target.classList.add(applyClassName);
           }
           //run addional funcs
           if (run) {
@@ -22,8 +24,8 @@ const Focus = ({ children, keyBoardOnly, focusClass, run }) => {
       } else if (e.type === "blur") {
         //this will be the blur event
         e.target.blur();
-        if (focusClass) {
-          e.target.classList.remove(focusClass);
+        if (applyClassName) {
+          e.target.classList.remove(applyClassName);
         }
         //run additional funcs
         if (run) {
@@ -34,8 +36,8 @@ const Focus = ({ children, keyBoardOnly, focusClass, run }) => {
       //Handles normal focus behavior
       if (e.type === "focus") {
         e.target.focus();
-        if (focusClass) {
-          e.target.classList.add(focusClass);
+        if (applyClassName) {
+          e.target.classList.add(applyClassName);
         }
         if (run) {
           run(true);
@@ -43,8 +45,8 @@ const Focus = ({ children, keyBoardOnly, focusClass, run }) => {
       } else if (e.type === "blur") {
         //this will be the blur event
         e.target.blur();
-        if (focusClass) {
-          e.target.classList.remove(focusClass);
+        if (applyClassName) {
+          e.target.classList.remove(applyClassName);
         }
         //run additional funcs
         if (run) {
@@ -68,7 +70,7 @@ const Focus = ({ children, keyBoardOnly, focusClass, run }) => {
 };
 
 Focus.propTypes = {
-  focusClass: PropTypes.string,
+  applyClassName: PropTypes.string,
   keyBoardOnly: PropTypes.bool,
   children: PropTypes.node.isRequired,
   run: PropTypes.func,

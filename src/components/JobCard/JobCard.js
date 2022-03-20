@@ -23,12 +23,7 @@ const JobCard = (props) => {
   let companyName = props.companyName;
   if (props.companyWebsite) {
     companyName = (
-      <a
-        className={styles.JobCard__companyLink}
-        href={props.companyWebsite}
-        target="_blank"
-        rel="noopener noreferrer nofollow"
-      >
+      <a className={styles.JobCard__companyLink} href={props.companyWebsite} target="_blank" rel="noopener noreferrer nofollow">
         {props.companyName}
       </a>
     );
@@ -47,14 +42,7 @@ const JobCard = (props) => {
 
   return (
     <Focus focusClass={styles._focused} keyBoardOnly>
-      <div
-        className={rootClass}
-        onClick={navigateHandler}
-        onKeyDown={navigateHandler}
-        tabIndex={0}
-        role="link"
-        style={rootStyle}
-      >
+      <div className={rootClass} onClick={navigateHandler} onKeyDown={navigateHandler} tabIndex={0} role="link" style={rootStyle}>
         {/* <JobImage
           showImage={props.showImage}
           isPreview={props.isPreview}
@@ -81,10 +69,7 @@ const JobCard = (props) => {
           handleClick={props.handleTagClick}
         />
 
-        <JobApplyButton
-          applyUrl={props.isPreview ? "" : props.applyUrl}
-          classes={{ root: styles.JobCard__applyButton }}
-        />
+        <JobApplyButton applyUrl={props.isPreview ? "" : props.applyUrl} classes={{ root: styles.JobCard__applyButton }} />
       </div>
     </Focus>
   );
@@ -93,7 +78,7 @@ const JobCard = (props) => {
 JobCard.defaultProps = {
   applyUrl: "",
   isPreview: false,
-  keyBoardFocusOnly: false,
+  keyboardFocusOnly: false,
 };
 
 JobCard.propTypes = {
@@ -105,7 +90,7 @@ JobCard.propTypes = {
   isPreview: PropTypes.bool,
   jobUrl: PropTypes.string.isRequired,
   jobPosition: PropTypes.string.isRequired,
-  keyBoardFocusOnly: PropTypes.bool,
+  keyboardFocusOnly: PropTypes.bool,
   location: PropTypes.string.isRequired,
   normalHighlight: PropTypes.bool,
   primaryTag: PropTypes.string,

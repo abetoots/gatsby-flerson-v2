@@ -1,5 +1,4 @@
 import { exposeStyles } from "@Shared/api/styles";
-import PropTypes from "prop-types";
 import React, { forwardRef } from "react";
 
 import * as styles from "./Button.module.scss";
@@ -16,34 +15,25 @@ const useStyles = exposeStyles({
   },
 });
 
+export type ButtonClasses = Partial<ReturnType<typeof useStyles>>;
+
+type ButtonProps = React.PropsWithChildren<{
+  type?: "button" | "submit" | "reset";
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  disabled?: boolean;
+  classes?: ButtonClasses;
+}>;
+
 //Custom button that always behaves as type:'button' since buttons behave as type="submit" inside a form if type is missing
-const Button = forwardRef((props, ref) => {
+const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   //Consume with props to return classes that are either merged or replaced depending on what you defined above
   const classes = useStyles(props);
 
   return (
-    <button
-      ref={ref}
-      type={props.type || "button"}
-      className={classes.root}
-      onClick={props.onClick}
-      disabled={props.disabled}
-      aria-label={props.label}
-    >
+    <button ref={ref} type={props.type} className={classes.root} onClick={props.onClick} disabled={props.disabled}>
       {props.children}
     </button>
   );
 });
-
-Button.displayName = "Button";
-Button.name = "Button";
-
-Button.propTypes = {
-  children: PropTypes.node,
-  label: PropTypes.string,
-  onClick: PropTypes.func,
-  type: PropTypes.string,
-  disabled: PropTypes.bool,
-};
 
 export default Button;

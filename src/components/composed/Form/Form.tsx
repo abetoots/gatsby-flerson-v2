@@ -1,9 +1,8 @@
 //Components
-import Button from "@Components/bits/Button/Button";
+import Button, { ButtonClasses } from "@Components/bits/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //Misc
 import { exposeStyles } from "@Shared/api/styles";
-import PropTypes from "prop-types";
 import React, { forwardRef } from "react";
 
 import * as styles from "./Form.module.scss";
@@ -21,15 +20,26 @@ const useStyles = exposeStyles({
   },
 });
 
+type FormProps = React.PropsWithChildren<{
+  loading?: boolean;
+  success?: boolean;
+  submitButton?: React.ReactNode | (() => React.ReactNode);
+  onSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
+  showStatusUi?: boolean;
+  error?: boolean;
+  submitText?: string;
+  classes?: Partial<ReturnType<typeof useStyles>>;
+}>;
+
 //Component API Type: Composable -> <Status/>
-const Form = forwardRef((props, ref) => {
+const Form = forwardRef<HTMLFormElement, FormProps>(({ submitText = "Submit", ...props }, ref) => {
   //Consume with props to return classes that are either merged or replaced depending on what you defined above
   const classes = useStyles(props);
   //Unexposed default styles
   const { Form__status, _success, _error } = styles;
 
   //Whenever any descendant is focused, this captures it. We simply add a focus class
-  const focusCaptureHandler = (e) => {
+  const focusCaptureHandler = (e: React.FocusEvent<HTMLFormElement, Element>) => {
     if (e.type === "focus") {
       e.target.classList.add(classes._focused);
     } else {
@@ -37,25 +47,9 @@ const Form = forwardRef((props, ref) => {
     }
   };
 
-  let renderChildren;
-  if (props.children) {
-    renderChildren = React.Children.map(props.children, (child) => {
-      //let prop types handle this
-      if (child && child.type.displayName === Status.name) {
-        return React.cloneElement(child, {
-          error: props.error,
-          success: props.success,
-          loading: props.loading,
-        });
-      } else {
-        return child;
-      }
-    });
-  }
-
   let statusUi;
   if (props.showStatusUi) {
-    let message = "";
+    let message: React.ReactNode = "";
     let statusClass = Form__status;
     if (props.success) {
       statusClass = `${statusClass} ${_success}`;
@@ -94,57 +88,33 @@ const Form = forwardRef((props, ref) => {
 
   //default: submit button is shown unless specifically disabled
   let button;
-  if (!props.disableSubmit) {
-    button = (
-      <Button
-        classes={{ root: classes.button }}
-        disabled={props.loading}
-        type="submit"
-        label={props.btnLabel}
-      >
-        {props.loading ? (
-          <FontAwesomeIcon icon="spinner" spin />
-        ) : (
-          props.btnText || "Submit"
-        )}
-      </Button>
-    );
+  if (props.submitButton || props.submitButton === null) {
+    button = typeof props.submitButton === "function" ? props.submitButton() : props.submitButton;
+  } else {
+    button = <FormSubmitButton loading={props.loading} classes={{ root: classes.button }} submitText={submitText} />;
   }
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-redundant-roles
     <form
       role="form" //for some reason react testing library can't pickup the form by role. this fixes it
       ref={ref}
       className={classes.root}
-      onSubmit={!props.disableSubmit ? props.handleSubmit : null}
+      onSubmit={props.onSubmit}
       onFocusCapture={focusCaptureHandler}
       onBlurCapture={focusCaptureHandler}
     >
-      {renderChildren}
+      {props.children}
       {button}
       {statusUi}
     </form>
   );
 });
 
-Form.displayName = "Form";
-
-Form.defaultProps = {
-  showStatusUi: true,
-  disableSubmit: false,
-  success: false,
-  error: "",
-};
-
-Form.propTypes = {
-  btnLabel: PropTypes.string,
-  children: PropTypes.node,
-  disableSubmit: PropTypes.bool,
-  error: PropTypes.string,
-  handleSubmit: PropTypes.func,
-  loading: PropTypes.bool,
-  showStatusUi: PropTypes.bool,
-  success: PropTypes.bool,
-};
+export const FormSubmitButton = ({ classes, loading, submitText = "Submit" }: { classes: ButtonClasses; loading?: boolean; submitText?: string }) => (
+  <Button classes={classes} disabled={loading} type="submit">
+    {loading ? <FontAwesomeIcon icon="spinner" spin /> : submitText}
+  </Button>
+);
 
 export default Form;

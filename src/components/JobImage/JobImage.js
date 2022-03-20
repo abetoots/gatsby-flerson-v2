@@ -1,4 +1,4 @@
-import Preview from "@Components/composables/Upload/Preview/Preview";
+import Preview from "@Components/composed/Upload/Preview/Preview";
 import { exposeStyles } from "@Shared/api/styles";
 import { GatsbyImage } from "gatsby-plugin-image";
 import PropTypes from "prop-types";
@@ -37,11 +37,7 @@ const JobImage = (props) => {
     } else if (props.image.fluid) {
       image = (
         <div className={classes.wrap}>
-          <GatsbyImage
-            style={{ borderRadius: "8px" }}
-            fluid={props.image.fluid}
-            alt={props.alt}
-          />
+          <GatsbyImage style={{ borderRadius: "8px" }} fluid={props.image.fluid} alt={props.alt} />
         </div>
       );
     } else if (props.image.fixed) {

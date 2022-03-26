@@ -20,22 +20,15 @@ const useStyles = exposeStyles({
 const Preview = (props) => {
   //Consume with props to return classes that are either merged or replaced depending on what you defined above
   const classes = useStyles(props);
-
-  let preview;
-  if (props.state.preview || props.state.url) {
-    preview = <img className={classes.image} src={props.state.preview || props.state.url} alt="preview" />;
-  } else {
-    preview = <span>No file chosen</span>;
-  }
-
-  return <div className={classes.root}>{preview}</div>;
+  return (
+    <div className={classes.root}>
+      <img className={classes.image} src={props.url} alt="preview" />
+    </div>
+  );
 };
 
 Preview.propTypes = {
-  state: PropTypes.shape({
-    url: PropTypes.string.isRequired,
-    preview: PropTypes.string.isRequired,
-  }),
+  url: PropTypes.string.isRequired,
 };
 
 export default Preview;

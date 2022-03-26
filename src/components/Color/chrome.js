@@ -13,7 +13,7 @@ const ChromeSwatchPicker = ({ color, onChangeComplete }) => {
   };
 
   return (
-    <div>
+    <>
       <Swatch color={color.hex} handleClick={clickSwatchHandler} />
       {showPicker ? (
         <div style={{ position: "absolute", zIndex: "2", right: "0" }}>
@@ -31,14 +31,10 @@ const ChromeSwatchPicker = ({ color, onChangeComplete }) => {
             role="button"
             aria-label="chrome picker"
           ></div>
-          <ChromePicker
-            disableAlpha
-            color={color}
-            onChangeComplete={onChangeComplete}
-          />
+          <ChromePicker disableAlpha color={color} onChangeComplete={onChangeComplete} />
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 

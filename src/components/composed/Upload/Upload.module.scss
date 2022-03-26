@@ -1,13 +1,52 @@
 .Upload {
-    position: relative;
+  position: relative;
 
-    &__input {
-        @include visually-hidden;
+  &__inputSection {
+    @apply mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md text-center;
+  }
+
+  &__overlay {
+    @apply w-full h-full absolute top-0 left-0 pointer-events-none z-50 flex flex-col items-center justify-center rounded-md;
+
+    > p,
+    i {
+      opacity: 0;
     }
 
-    &__description {
-        font-size: .8em;
-        color: rgb(129, 129, 129);
-    }
+    &._draggedOver {
+      background-color: rgba(0, 0, 0, 0.2);
 
+      > p,
+      i {
+        opacity: 1;
+      }
+    }
+  }
+
+  &__overlayText {
+    @apply text-lg font-bold;
+  }
+
+  &__photo {
+    @apply mx-auto h-12 w-12 text-gray-400;
+  }
+
+  &__instructionWrap {
+    @apply flex text-sm text-gray-600;
+  }
+  &__instruction {
+    @apply relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500;
+  }
+
+  &__trailingLabel {
+    @apply pl-1;
+  }
+
+  &__afterLabel {
+    @apply text-xs text-gray-500;
+  }
+
+  &__input {
+    @include visually-hidden;
+  }
 }

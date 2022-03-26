@@ -1,9 +1,9 @@
 //Components
-import Checkbox from "@Components/bits/Inputs/Checkbox/Checkbox";
-import InputLine from "@Components/bits/Inputs/Input/InputLine";
-import Select from "@Components/bits/Inputs/Select/Select";
-import Textarea from "@Components/bits/Inputs/Textarea/Textarea";
-import Toggle from "@Components/bits/Inputs/Toggle/Toggle";
+import Checkbox from "@Components/Inputs/Checkbox/Checkbox";
+import InputLine from "@Components/Inputs/Input/InputLine";
+import Select from "@Components/Inputs/Select/Select";
+import Textarea from "@Components/Inputs/Textarea/Textarea";
+import Toggle from "@Components/Inputs/Toggle/Toggle";
 import Upload from "@Components/composed/Upload/Upload";
 import { BaseUncontrolledInputProps, InputGroupConfig } from "@Index/shared/utils/types";
 import { useFormContext, useController, ControllerRenderProps, FieldValues, ControllerFieldState, FormState } from "react-hook-form";
@@ -61,6 +61,7 @@ const FormInput = (props: FormInputProps) => {
       return null;
     }
   }
+
   let input = null;
   if (!props.renderInput) {
     switch (props.elType) {
@@ -72,12 +73,14 @@ const FormInput = (props: FormInputProps) => {
             renderAfterLabel={() => description}
             onChange={field.onChange}
             required={!!props.validation?.required}
+            errorText={formState?.errors?.[props.inputKey]?.message}
           />
         );
         break;
       case "checkbox":
         input = (
           <Checkbox
+            {...props.elementConfig}
             value={field.value || props.initialValue}
             renderAfterLabel={() => description}
             stateHandler={(newVal) => {
@@ -96,6 +99,7 @@ const FormInput = (props: FormInputProps) => {
       case "toggle":
         input = (
           <Toggle
+            {...props.elementConfig}
             value={field.value || props.initialValue}
             renderAfterLabel={() => description}
             stateHandler={(newVal) => {
@@ -103,17 +107,20 @@ const FormInput = (props: FormInputProps) => {
             }}
             heading={props.elementConfig.heading}
             required={!!props.validation?.required}
+            errorText={formState?.errors?.[props.inputKey]?.message}
           />
         );
         break;
       case "textarea":
         input = (
           <Textarea
+            {...props.elementConfig}
             value={field.value || props.initialValue}
             renderAfterLabel={() => description}
             onChange={field.onChange}
             heading={props.elementConfig.heading}
             required={!!props.validation?.required}
+            errorText={formState?.errors?.[props.inputKey]?.message}
           />
         );
         break;
@@ -121,18 +128,21 @@ const FormInput = (props: FormInputProps) => {
       case "file":
         input = (
           <Upload
+            {...props.elementConfig}
             heading={props.elementConfig.heading}
             state={field.value || props.initialValue}
             stateHandler={(newVal) => {
               setValue(props.inputKey, newVal);
             }}
             renderAfterLabel={() => description}
+            errorText={formState?.errors?.[props.inputKey]?.message}
           />
         );
         break;
       case "input":
         input = (
           <InputLine
+            {...props.elementConfig}
             type={props.elementConfig.type}
             placeholder={props.elementConfig.placeholder}
             value={field.value || props.initialValue}

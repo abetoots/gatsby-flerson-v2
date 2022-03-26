@@ -1,5 +1,5 @@
 //Components
-import Button from "@Components/bits/Button/Button";
+import Button from "@Components/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";

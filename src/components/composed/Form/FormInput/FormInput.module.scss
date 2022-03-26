@@ -6,6 +6,7 @@
   margin-bottom: 1.5rem;
 
   &__description {
+    @apply pt-1;
     font-size: 0.8em;
     color: rgb(129, 129, 129);
     font-style: italic;

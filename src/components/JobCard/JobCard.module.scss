@@ -100,4 +100,25 @@
       transform: scale(1.1);
     }
   }
+
+  &__initialsWrap {
+    box-sizing: content-box;
+    width: 80px;
+    height: 80px;
+    padding: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__initials {
+    height: 100%;
+    width: 100%;
+    color: rgba(238, 197, 150, 0.767);
+    font-size: 3.3em;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }

@@ -1,5 +1,5 @@
 //Components
-import Button from "@Components/bits/Button/Button";
+import Button from "@Components/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import PropTypes from "prop-types";
 import React from "react";
@@ -20,11 +20,7 @@ const MarkButton = ({ format, icon }) => {
   }
 
   return (
-    <Button
-      classes={{ root: rootClass }}
-      onClick={() => toggleMark(editor, format)}
-      label={format}
-    >
+    <Button classes={{ root: rootClass }} onClick={() => toggleMark(editor, format)} label={format}>
       <FontAwesomeIcon icon={icon} />
     </Button>
   );
@@ -46,10 +42,7 @@ export const isMarkActive = (editor, format) => {
 };
 
 MarkButton.propTypes = {
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-  ]),
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
 };
 
 export default MarkButton;

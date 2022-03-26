@@ -1,5 +1,5 @@
 //Components
-import Button, { ButtonClasses } from "@Components/bits/Button/Button";
+import Button, { ButtonClasses } from "@Components/Button/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //Misc
 import { exposeStyles } from "@Shared/api/styles";

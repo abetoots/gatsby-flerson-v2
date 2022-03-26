@@ -1,0 +1,24 @@
+.Button {
+  color: inherit;
+  margin: 0;
+  background-color: transparent;
+  border-width: 0;
+  border-style: solid;
+  border-color: #e2e8f0;
+  text-transform: none;
+
+  //special case, this should be a modifier
+  &__default {
+    cursor: pointer;
+    font-family: inherit;
+    background-image: none;
+    line-height: inherit;
+    overflow: visible;
+    font-family: inherit;
+    box-sizing: border-box;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}

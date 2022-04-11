@@ -1,3 +1,5 @@
+@use "../util/variables" as *;
+@use "sass:math";
 /**
  * Sets a media query for the specified breakpoint
  *
@@ -12,20 +14,20 @@
  * }
  */
 @mixin media-query($media-query) {
-    $breakpoint-found: false;
+  $breakpoint-found: false;
 
-    @each $breakpoint in $breakpoints {
-        $name: nth($breakpoint, 1);
-        $declaration: nth($breakpoint, 2);
+  @each $breakpoint in $breakpoints {
+    $name: nth($breakpoint, 1);
+    $declaration: nth($breakpoint, 2);
 
-        @if $media-query==$name and $declaration {
-            $breakpoint-found: true;
+    @if $media-query==$name and $declaration {
+      $breakpoint-found: true;
 
-            @media only screen and #{$declaration} {
-                @content;
-            }
-        }
+      @media only screen and #{$declaration} {
+        @content;
+      }
     }
+  }
 }
 
 /**
@@ -40,13 +42,13 @@
    * }
    */
 @mixin transition($transitions...) {
-    $output: ();
+  $output: ();
 
-    @each $transition in $transitions {
-        $output: append($output, get-transition-properties($transition), comma);
-    }
+  @each $transition in $transitions {
+    $output: append($output, get-transition-properties($transition), comma);
+  }
 
-    transition: $output;
+  transition: $output;
 }
 
 /**
@@ -58,14 +60,14 @@
    * }
    */
 @mixin clearfix() {
-    &::after {
-        content: '';
-        display: table;
-        clear: both;
-    }
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 
-    // stylelint-disable-next-line
-    *zoom: 1;
+  // stylelint-disable-next-line
+  *zoom: 1;
 }
 
 /**
@@ -77,15 +79,15 @@
    * }
    */
 @mixin visually-hidden() {
-    // stylelint-disable-next-line
-    position: absolute !important;
-    overflow: hidden;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    clip: rect(0 0 0 0);
+  // stylelint-disable-next-line
+  position: absolute !important;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  clip: rect(0 0 0 0);
 }
 
 /**
@@ -100,13 +102,23 @@
    * }
    */
 @mixin visually-shown($position: inherit) {
-    // stylelint-disable-next-line
-    position: $position !important;
-    overflow: auto;
-    width: auto;
-    height: auto;
-    margin: 0;
-    clip: auto;
+  // stylelint-disable-next-line
+  position: $position !important;
+  overflow: auto;
+  width: auto;
+  height: auto;
+  margin: 0;
+  clip: auto;
+}
+
+@mixin paper($padding: 1.5rem) {
+  border-color: rgb(229 231 235);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+  border-width: 1px;
+  border-style: solid;
+  padding: $padding;
+  background-color: white;
 }
 
 // How to use:
@@ -119,28 +131,28 @@
 // }
 
 @function strip-unit($value) {
-    @return $value / ($value * 0 + 1);
+  @return math.div($value, ($value * 0 + 1));
 }
 
 @mixin fluid-type($min-vw, $max-vw, $min-px, $max-px, $type) {
-    $u1: unit($min-vw);
-    $u2: unit($max-vw);
-    $u3: unit($min-px);
-    $u4: unit($max-px);
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-px);
+  $u4: unit($max-px);
 
-    @if $u1==$u2 and $u1==$u3 and $u1==$u4 {
-        & {
-            #{$type}: $min-px;
+  @if $u1==$u2 and $u1==$u3 and $u1==$u4 {
+    & {
+      #{$type}: $min-px;
 
-            @media screen and (min-width: $min-vw) {
-                #{$type}: calc(#{$min-px} + #{strip-unit($max-px - $min-px)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
-            }
+      @media screen and (min-width: $min-vw) {
+        #{$type}: calc(#{$min-px} + #{strip-unit($max-px - $min-px)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
 
-            @media screen and (min-width: $max-vw) {
-                #{$type}: $max-px;
-            }
-        }
+      @media screen and (min-width: $max-vw) {
+        #{$type}: $max-px;
+      }
     }
+  }
 }
 
 //TODO replace these
@@ -150,31 +162,31 @@ $tablet: 768px;
 $mobile: 320px;
 
 @mixin tablet-above {
-    @media (min-width: #{$tablet}) {
-        @content;
-    }
+  @media (min-width: #{$tablet}) {
+    @content;
+  }
 }
 
 @mixin tablet-below {
-    @media (max-width: #{$tablet - 1}) {
-        @content;
-    }
+  @media (max-width: #{$tablet - 1}) {
+    @content;
+  }
 }
 
 @mixin desktop-above {
-    @media (min-width: #{$desktop}) {
-        @content;
-    }
+  @media (min-width: #{$desktop}) {
+    @content;
+  }
 }
 
 @mixin desktop-below {
-    @media (max-width: #{$desktop - 1}) {
-        @content;
-    }
+  @media (max-width: #{$desktop - 1}) {
+    @content;
+  }
 }
 
 @mixin mobile {
-    @media (min-width: #{$mobile}) {
-        @content;
-    }
+  @media (min-width: #{$mobile}) {
+    @content;
+  }
 }

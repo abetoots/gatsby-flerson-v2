@@ -1,7 +1,7 @@
 import {
-  VALUE_PART_TIME,
   VALUE_CONTRACTOR,
   VALUE_FULL_TIME,
+  VALUE_PART_TIME,
 } from "./constants";
 
 export default [

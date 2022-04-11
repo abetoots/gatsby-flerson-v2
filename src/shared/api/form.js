@@ -2,7 +2,7 @@ import { useState } from "react";
 //TODO comments
 //TODO toRemove seems more of a use case than toReset
 //TODO toRemove should 'remove' or reset it to an EMPTY value instead of toReset resetting it to the initial value
-export const initForm = (inputs) => {
+export const initForm = (inputs, key) => {
   let initialState = {};
   inputs.forEach((input) => {
     initialState[input.key] = input.initialValue;

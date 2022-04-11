@@ -1,12 +1,13 @@
 import * as icons from "@Images/category-icons";
+
 import {
-  VALUE_PROGRAMMING,
-  VALUE_VA,
   VALUE_DESIGN,
   VALUE_MARKETING,
-  VALUE_WRITING,
   VALUE_NON_TECH,
+  VALUE_PROGRAMMING,
   VALUE_TEACHING,
+  VALUE_VA,
+  VALUE_WRITING,
 } from "./constants";
 
 export default [

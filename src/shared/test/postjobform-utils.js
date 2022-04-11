@@ -1,9 +1,8 @@
-import React, { useMemo } from "react";
-
+import { EditorsContext } from "@Index/pages/post-job";
 import { render as rtlRender } from "@testing-library/react";
+import React, { useMemo } from "react";
 import { createEditor } from "slate";
 import { withReact } from "slate-react";
-import { EditorsContext } from "@Index/pages/post-job";
 
 const render = (ui, options) => rtlRender(ui, { wrapper: Wrapper, ...options });
 

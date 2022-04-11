@@ -17,12 +17,13 @@ const useStyles = exposeStyles({
 type JobApplyButtonProps = {
   classes?: ReturnType<typeof useStyles>;
   applyUrl: string;
+  disabled?: boolean;
 };
 
 const JobApplyButton = (props: JobApplyButtonProps) => {
   const classes = useStyles(props);
   let applyButton;
-  if (!props.applyUrl) {
+  if (!props.applyUrl || props.disabled) {
     applyButton = (
       <Button onClick={(e) => e.stopPropagation()} classes={{ root: classes.root }}>
         Apply

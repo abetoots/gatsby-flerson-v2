@@ -4,12 +4,16 @@ import "./FullJob.scss";
 import Tags from "@Components/Tags/Tags";
 import JobApplyButton from "@Components/JobApplyButton/JobApplyButton";
 import JobImage from "@Components/JobImage/JobImage";
-import PropTypes from "prop-types";
 import React from "react";
 import { JobCardProps } from "@Components/JobCard/JobCard";
 
 type FullJobProps = JobCardProps & {
   description?: string;
+  howToApply?: string;
+  employerUrl: string;
+  salary: number;
+  salaryType: string;
+  employmentType: string;
 };
 
 const FullJob = (props: FullJobProps) => {
@@ -37,20 +41,23 @@ const FullJob = (props: FullJobProps) => {
     );
   }
 
+  let image = (
+    <div className={"FullJob__initialsWrap"}>
+      <div className={"FullJob__intitials"}>{initials}</div>
+    </div>
+  );
+  if (props.renderImage) {
+    image = props.renderImage(image);
+  } else {
+    if (props.imageNode) {
+      image = <JobImage imageNode={props.imageNode} alt={`logo of ${props.employerName}`} />;
+    }
+  }
+
   return (
     <div className="FullJob">
       <section className="FullJob__head">
-        <JobImage
-          showImage={props.showLogo}
-          classes={{
-            wrap: "FullJob__imageWrap",
-            initialsWrap: "FullJob__initialsWrap",
-          }}
-          isPreview={props.isPreview}
-          initials={initials}
-          image={props.image}
-          alt={`logo of ${props.employerName}`}
-        />
+        {image}
 
         <div className="FullJob__headDetails">
           <div>
@@ -81,13 +88,12 @@ const FullJob = (props: FullJobProps) => {
             tag: "FullJob__tag",
             primaryTag: "FullJob__tag _primary",
           }}
-          hasPrimaryTag={true}
           primaryTag={props.primaryTag}
           tags={props.tags}
-          handleClick={props.handleTagClick}
+          onClick={props.handleTagClick}
         />
 
-        <JobApplyButton applyUrl={props.applyUrl} disabled={props.isPreview} classes={{ root: "FullJob__applyButton" }} />
+        <JobApplyButton applyUrl={props.applyUrl} classes={{ root: "FullJob__applyButton" }} />
       </section>
       <section className="FullJob__description">
         {description}

@@ -1,33 +1,29 @@
-import React, { useState, useEffect } from "react";
 import "./index.scss";
 
 //Components
-import Button from "@Components/bits/Button/Button";
-import JobFilters from "@Core/JobFilters/JobFilters";
-import ViewJobs from "@Core/ViewJobs/ViewJobs";
-import Search from "@Components/bits/Search/Search";
-import SEO from "@Components/seo";
+import Button from "@Components/Button/Button";
+import Search from "@Components/Search/Search";
 import Layout from "@Components/layout";
+import SEO from "@Components/seo";
+import JobFilters from "@Core/JobFilters/JobFilters";
 import ToggleJobs from "@Core/ToggleJobs/ToggleJobs";
+import ViewJobs from "@Core/ViewJobs/ViewJobs";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { searchIcon3 } from "@Images/search-icons";
+import axios from "axios";
 //Misc
 import { graphql, navigate } from "gatsby";
-import { searchIcon3 } from "@Images/search-icons";
-
-//Request
-import GET_JOB_POSTS_BY_SEARCH from "./get-jobs-by-search.graphql";
-import GET_JOB_POSTS_BY_TAG from "./get-jobs-by-tag.graphql";
-import { useLazyQuery } from "@apollo/react-hooks";
+import React, { useEffect, useMemo, useState } from "react";
+import { useQuery } from "react-query";
 
 const IndexPage = ({ data, location }) => {
   //SETUP
   //create a hash table with key-value pairs of jobId = indexInNodesArray
-  const jobIndex = {};
-  data.allWpJobPost.nodes.forEach((node, arrayIndex) => {
+  const jobIndex = useMemo(() => ({}), []);
+  data.allMongodbEngineJobs.nodes.forEach((node, arrayIndex) => {
     jobIndex[node.id] = arrayIndex;
   });
-  const jobNodes = data.allWpJobPost.nodes;
+  const jobNodes = data.allMongodbEngineJobs.nodes;
   //STATE
   /**
    * On the top-level, we have three sets of job posts that are useful for different cases
@@ -40,58 +36,41 @@ const IndexPage = ({ data, location }) => {
    *
    */
   const [currentJobPosts, setCurrentJobPosts] = useState(jobNodes);
+  console.log("jobNodes", jobNodes);
   const [fetchedPosts, setFetchedPosts] = useState([]);
 
   const [searchState, setSearchState] = useState("");
   const [showJobFilters, setShowJobFilters] = useState(false);
   const [activeTag, setActiveTag] = useState("");
 
+  const params = new URLSearchParams(location.search);
   //EFFECTS
-  const [search, { loading: searching, data: searchData }] = useLazyQuery(
-    GET_JOB_POSTS_BY_SEARCH
+  //only starts query when enabled = true
+  const { isLoading: searching, data: searchData } = useQuery(
+    ["searchJobsKey", location.search],
+    async () => {
+      const { data } = await axios.get(`/.netlify/functions/jobs?q=${searchState}`);
+      return data;
+    },
+    { enabled: location.pathname === "/filter" && params.has("search") },
   );
-  const [
-    searchByTag,
-    { loading: searchingByTag, data: searchByTagData },
-  ] = useLazyQuery(GET_JOB_POSTS_BY_TAG);
 
-  useEffect(() => {
-    //when current location is at '/filter', it means we want to query for data
-    if (location.pathname === "/filter") {
-      const params = new URLSearchParams(location.search);
-      //if props.location has search query param , fire the search
-      if (params.has("search")) {
-        search({
-          variables: {
-            query: params.get("search"),
-          },
-        });
-      }
+  //only starts query when enabled = true
+  const { isLoading: searchingByTag, data: searchByTagData } = useQuery(
+    ["searchJobsByTagKey", location.search],
+    async () => {
+      let k = "tag" in params ? "tags" : "category";
 
-      //if props.location has a tag query param , fire the tag search
+      const { data } = await axios.get(`/.netlify/functions/jobs?${k}=${searchState}`);
       if (params.has("tag")) {
-        searchByTag({
-          variables: {
-            tag: params.get("tag"),
-            fieldType: "NAME",
-            taxonomy: "JOBTAG",
-          },
-        });
         setActiveTag(params.get("tag"));
       }
-
-      if (params.has("category")) {
-        searchByTag({
-          variables: {
-            tag: params.get("category"),
-            fieldType: "NAME",
-            taxonomy: "JOBCATEGORY",
-          },
-        });
-        setActiveTag(params.get("category"));
-      }
-    }
-  }, [location.pathname, location.search, search, searchByTag]);
+      return data;
+    },
+    {
+      enabled: location.pathname === "/filter" && (params.has("tag") || params.has("category")),
+    },
+  );
 
   /**
    * Listen to the fired queries, find if any jobs returned by our queries have a match in our jobIndex
@@ -140,9 +119,7 @@ const IndexPage = ({ data, location }) => {
 
   const tagClickHandler = (e, tag, isPrimary) => {
     e.stopPropagation(); //prevent parent's click handler
-    isPrimary
-      ? navigate(`/filter?category=${tag}`)
-      : navigate(`/filter?tag=${tag}`);
+    isPrimary ? navigate(`/filter?category=${tag}`) : navigate(`/filter?tag=${tag}`);
   };
 
   let message;
@@ -153,7 +130,7 @@ const IndexPage = ({ data, location }) => {
   }
 
   return (
-    <Layout>
+    <Layout mainStyle={{ backgroundColor: "#f1f5f9", padding: "1.5rem" }}>
       <SEO />
       <section className="Home__searchWrap">
         <Search
@@ -181,95 +158,55 @@ const IndexPage = ({ data, location }) => {
       </section>
       <section className="Home__filtersWrap">
         <JobFilters
-          originalPosts={
-            location.pathname === "/"
-              ? jobNodes
-              : location.pathname === "/filter"
-              ? fetchedPosts
-              : []
-          }
+          currentContextPosts={location.pathname === "/" ? jobNodes : location.pathname === "/filter" ? fetchedPosts : []}
           setCurrentPosts={setCurrentJobPosts}
           isHidden={!showJobFilters}
         />
       </section>
-      <h1 style={{ textAlign: "center" }}>Job Posts:</h1>
-      <section className="Home__viewWrap">
-        <ToggleJobs
-          originalPosts={
-            location.pathname === "/"
-              ? jobNodes
-              : location.pathname === "/filter"
-              ? fetchedPosts
-              : []
-          }
-          setCurrentPosts={setCurrentJobPosts}
-        />
-        <ViewJobs
-          jobPosts={currentJobPosts}
-          loading={searching || searchingByTag}
-          message={message}
-          handleTagClick={tagClickHandler}
-        />
-      </section>
+      <div className="Home__toggleJobsWrap">
+        <h1 style={{ textAlign: "center" }}>Job Posts:</h1>
+        <section className="Home__viewWrap">
+          <ToggleJobs
+            currentContextPosts={location.pathname === "/" ? jobNodes : location.pathname === "/filter" ? fetchedPosts : []}
+            setCurrentPosts={setCurrentJobPosts}
+          />
+          <ViewJobs jobPosts={currentJobPosts} loading={searching || searchingByTag} message={message} handleTagClick={tagClickHandler} />
+        </section>
+      </div>
     </Layout>
   );
 };
 
 export const query = graphql`
   query GET_POST_DATA_FOR_CARDS {
-    allWpJobPost(sort: { order: DESC, fields: date }) {
+    allMongodbEngineJobs(sort: { fields: created, order: DESC }) {
       nodes {
         addOns {
           highlight
           showLogo
           stickyMonth
           stickyWeek
-          customHighlight {
-            hex
-          }
+          customHighlight
         }
-        author {
-          node {
-            slug
-          }
-        }
-        content
-        databaseId
-        date
-        employmentTypes {
-          nodes {
-            name
-            slug
-          }
-        }
+        created
         id
-        featuredImage {
-          node {
-            localFile {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_noBase64
-                }
-              }
-            }
-          }
+        featuredImage
+        employmentType {
+          name
+          id
         }
         hiringInfo {
-          name
+          recruiter
           website
-          isCompany
+          type
         }
-        jobCategories {
-          nodes {
-            name
-            slug
-          }
+        category {
+          name
+          id
         }
-        jobTags {
-          nodes {
-            name
-            slug
-          }
+        tags {
+          name
+          id
         }
         location
         title

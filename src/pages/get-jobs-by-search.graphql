@@ -1,8 +1,0 @@
-query GET_JOB_POSTS_BY_SEARCH($query: String!) {
-  jobPosts(where: { titleAndCompanyNameSearch: $query }) {
-    nodes {
-      id
-      databaseId
-    }
-  }
-}

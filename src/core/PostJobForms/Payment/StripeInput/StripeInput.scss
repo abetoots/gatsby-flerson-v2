@@ -1,0 +1,32 @@
+//Style the Stripe Element container
+.StripeElement {
+    height: 40px;
+    padding: 10px 12px;
+    width: 100%;
+    color: #32325d;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    transition: box-shadow 150ms ease;
+
+    &--focus {
+        box-shadow: 0 1px 3px 0 #cfd7df;
+    }
+
+    &--invalid {
+        border-color: #fa755a;
+    }
+
+    &--webkit-autofill {
+        background-color: #fefde5 !important;
+    }
+
+    &__description {
+        display: flex;
+        align-items: center;
+        font-size: .8em;
+        color: rgb(129, 129, 129);
+        font-style: italic;
+    }
+}

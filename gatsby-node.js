@@ -8,17 +8,17 @@
 const path = require("path");
 
 // Implement the Gatsby API “onCreatePage”. This is
-// // called after every page is created.
-// exports.onCreatePage = async ({ page, actions }) => {
-//   const { createPage } = actions;
-//   if (page.path.match(/^\/post-job/)) {
-//     // page.matchPath is a special key that's used for matching pages
-//     // with corresponding routes only on the client.
-//     page.matchPath = "/post-job/*";
-//     // Update the page.
-//     createPage(page);
-//   }
-// };
+// called after every page is created.
+exports.onCreatePage = async ({ page, actions }) => {
+  const { createPage } = actions;
+  if (page.path.match(/^\/post-job/)) {
+    // page.matchPath is a special key that's used for matching pages
+    // with corresponding routes only on the client.
+    page.matchPath = "/post-job/*";
+    // Update the page.
+    createPage(page);
+  }
+};
 
 //Create pages for each job post
 exports.createPages = async ({ actions, graphql }) => {
@@ -72,8 +72,7 @@ exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
     plugins: [
       new FilterWarningsPlugin({
-        exclude:
-          /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
+        exclude: /mini-css-extract-plugin[^]*Conflicting order. Following module has been added:/,
       }),
     ],
   });

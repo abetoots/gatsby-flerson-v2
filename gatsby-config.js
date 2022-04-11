@@ -1,8 +1,13 @@
 const path = require("path");
+const tailwindcss = require("tailwindcss");
+const tailwindNesting = require("tailwindcss/nesting");
+const postcssImport = require("postcss-import");
 
 require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 });
+
+console.log("process", process.env);
 
 module.exports = {
   siteMetadata: {
@@ -18,6 +23,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sass`,
       options: {
+        postCssPlugins: [postcssImport(), tailwindNesting(), tailwindcss()],
         sassOptions: {
           includePaths: [
             path.resolve(__dirname, "src/sass/util/_variables.scss"),
@@ -27,9 +33,9 @@ module.exports = {
         },
         //only variables and mixins to avoid duplicating
         additionalData: `
-            @import "./src/sass/util/variables";
-            @import "./src/sass/tools/functions";
-            @import "./src/sass/tools/mixins";
+            @use "./src/sass/util/variables" as *;
+            @use "./src/sass/tools/functions" as *;
+            @use "./src/sass/tools/mixins" as *;
             `,
       },
     },
@@ -49,7 +55,7 @@ module.exports = {
           "@Images": path.resolve(__dirname, "src/images/"),
           "@Components": path.resolve(__dirname, "src/components/"),
           "@Core": path.resolve(__dirname, "src/core/"),
-          "@Hoc": path.resolve(__dirname, "src/hoc/"),
+          "@Hoc": path.resolve(__dirname, "src/components/hoc/"),
           "@Index": path.resolve(__dirname, "src/"),
           "@Shared": path.resolve(__dirname, "src/shared/"),
         },

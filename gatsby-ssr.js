@@ -7,12 +7,11 @@
 // You can delete this file if you're not using it
 import "typeface-dosis";
 import "typeface-open-sans";
-import { QueryClient, QueryClientProvider } from "react-query";
+
 import React from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 export const wrapRootElement = ({ element }) => {
   const queryClient = new QueryClient();
-  return (
-    <QueryClientProvider client={queryClient}>{element}</QueryClientProvider>
-  );
+  return <QueryClientProvider client={queryClient}>{element}</QueryClientProvider>;
 };

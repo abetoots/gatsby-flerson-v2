@@ -9,10 +9,11 @@
   ],
   "scripts": {
     "develop": "gatsby develop",
-    "start": "gatsby develop",
+    "start": "ENABLE_GATSBY_REFRESH_ENDPOINT=true gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "clean": "gatsby clean"
+    "clean": "gatsby clean",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.3.0",
@@ -20,14 +21,16 @@
     "@fortawesome/free-regular-svg-icons": "^6.0.0",
     "@fortawesome/free-solid-svg-icons": "^6.0.0",
     "@fortawesome/react-fontawesome": "^0.1.17",
+    "@heroicons/react": "^1.0.6",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.23.0",
     "axios": "^0.26.0",
+    "classnames": "^2.3.1",
     "escape-html": "^1.0.3",
     "gatsby": "^4.7.2",
     "gatsby-plugin-alias-imports": "^1.0.5",
     "gatsby-plugin-google-analytics": "^4.7.0",
-    "gatsby-plugin-image": "^2.7.0",
+    "gatsby-plugin-image": "^2.10.1",
     "gatsby-plugin-manifest": "^4.7.0",
     "gatsby-plugin-netlify": "^4.1.0",
     "gatsby-plugin-offline": "^5.7.0",
@@ -49,6 +52,7 @@
     "react-color": "^2.19.3",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-hook-form": "^7.27.1",
     "react-query": "^3.34.16",
     "react-typography": "^0.16.20",
     "sass": "^1.49.8",
@@ -61,10 +65,17 @@
     "typography-theme-us-web-design-standards": "^0.16.19"
   },
   "devDependencies": {
+    "@types/node": "^17.0.14",
+    "@types/react": "^17.0.38",
+    "@types/react-color": "^3.0.6",
+    "@types/react-dom": "^17.0.11",
     "eslint": "^8.9.0",
     "eslint-config-react-app": "^7.0.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "gatsby-plugin-graphql-loader": "^1.0.2",
+    "postcss-import": "^14.0.2",
+    "tailwindcss": "^3.0.23",
+    "typescript": "^4.5.5",
     "webpack": "^5.69.1",
     "webpack-filter-warnings-plugin": "^1.2.1"
   }

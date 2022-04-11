@@ -6,9 +6,10 @@
       "@Images/*": ["./src/images/*"],
       "@Components/*": ["./src/components/*"],
       "@Core/*": ["./src/core/*"],
-      "@Hoc/*": ["./src/hoc/*"],
+      "@Hoc/*": ["./src/components/hoc/*"],
       "@Index/*": ["./src/*"],
-      "@Shared/*": ["src/shared/*"]
-    }
+      "@Shared/*": ["./src/shared/*"]
+    },
+    "jsx": "react"
   }
 }

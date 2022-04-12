@@ -1,6 +1,7 @@
 //Components
 import Button from "@Components/Button/Button";
 import FullJob from "@Components/FullJob/FullJob";
+import ImagePreview from "@Components/composed/Upload/Preview/Preview";
 import { serialize } from "@Components/RichEditor/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { EditorsContext } from "@Index/pages/post-job";
@@ -24,7 +25,7 @@ import {
 import { navigate } from "gatsby";
 import parse from "html-react-parser";
 import startCase from "lodash.startcase";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { useLocation } from "@reach/router";
 
@@ -37,11 +38,13 @@ const Preview = () => {
   const { getValues } = useFormContext();
 
   const formValues = getValues();
-  console.log("fv", formValues);
-  if (location.pathname !== "/post-job/preview") {
-    navigate("/post-job");
-    return null;
-  }
+
+  useEffect(() => {
+    if (location.pathname !== "/post-job/preview") {
+      navigate("/post-job");
+      return null;
+    }
+  }, [location.pathname]);
 
   let salaryType;
   switch (formValues[SALARY_TYPE]) {
@@ -67,28 +70,23 @@ const Preview = () => {
   };
 
   return (
-    <div>
+    <div className={styles.Preview}>
       <div className={styles.Preview__header}>
-        <Button onClick={buttonClickHandler} classes={{ root: styles.Preview__backButton }}>
+        <Button onClick={() => buttonClickHandler()} classes={{ root: styles.Preview__backButton }}>
           <FontAwesomeIcon icon="chevron-left" />
           <div>BACK</div>
         </Button>
-        <h1>
-          Preview
-          <span role="img" aria-label="emoji of film projector">
-            📽️
-          </span>
-        </h1>
+        <h1 style={{ margin: 0 }}>Preview</h1>
       </div>
       <FullJob
         addOns={formValues[ADD_ONS]}
         applyUrl=""
         employerName={formValues[EMPLOYER_NAME]}
         employmentType={startCase(formValues[EMPLOYMENT_TYPE].value.replace("-", " "))}
-        handleTagClick={tagClickHandler}
+        handleTagClick={() => {}}
         renderImage={(noImage) => {
           if (formValues[EMPLOYER_LOGO][0]) {
-            return <Preview url={formValues[EMPLOYER_LOGO][0].url} />;
+            return <ImagePreview url={formValues[EMPLOYER_LOGO][0].url} />;
           } else {
             return noImage;
           }

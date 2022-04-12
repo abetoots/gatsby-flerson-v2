@@ -39,7 +39,7 @@ const PostJobForms = (props) => {
   const { jobDescEditor, howToApplyEditor } = useContext(EditorsContext);
 
   //watch was made for the render phase, not useEffect
-  const formValues = getValues();
+  const formValues = watch();
 
   console.log("fv", formValues);
 

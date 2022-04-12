@@ -42,8 +42,8 @@ const FullJob = (props: FullJobProps) => {
   }
 
   let image = (
-    <div className={"FullJob__initialsWrap"}>
-      <div className={"FullJob__intitials"}>{initials}</div>
+    <div className="FullJob__initialsWrap">
+      <div className="FullJob__initials">{initials}</div>
     </div>
   );
   if (props.renderImage) {
@@ -56,49 +56,52 @@ const FullJob = (props: FullJobProps) => {
 
   return (
     <div className="FullJob">
-      <section className="FullJob__head">
-        {image}
+      <div className="FullJob__head">
+        <section>{image}</section>
 
-        <div className="FullJob__headDetails">
+        <section className="FullJob__headDetails">
           <div>
-            <h1>{props.jobPosition}</h1>
+            <h1 className="FullJob__jobPosition">{props.jobPosition}</h1>
             <h2>
               <a className="FullJob__employerUrl" href={props.employerUrl} rel="noopener noreferrer nofollow" target="_blank">
                 {props.employerName}
               </a>
             </h2>
-            <span style={{ fontSize: ".8em" }}>Accepts: {props.location}</span>
+            <p style={{ fontSize: ".8em" }}>
+              Accepts: <span>{props.location}</span>
+            </p>
           </div>
           <div>
-            <div>
-              <h3 style={{ display: "inline-block" }}>Salary:</h3> <span>${props.salary}</span>
-            </div>
-            <div>
-              <h3 style={{ display: "inline-block" }}>Salary Type:</h3> <span>{props.salaryType}</span>
-            </div>
-            <div>
-              <h3 style={{ display: "inline-block" }}>Employment:</h3> <span> {props.employmentType}</span>
-            </div>
+            <p>
+              Salary: <span>${props.salary}</span>
+            </p>
+            <p>
+              Salary Type: <span>{props.salaryType}</span>
+            </p>
+            <p>
+              Employment: <span> {props.employmentType}</span>
+            </p>
           </div>
-        </div>
+        </section>
 
-        <Tags
-          classes={{
-            root: "FullJob__tags",
-            tag: "FullJob__tag",
-            primaryTag: "FullJob__tag _primary",
-          }}
-          primaryTag={props.primaryTag}
-          tags={props.tags}
-          onClick={props.handleTagClick}
-        />
+        <section className="FullJob__tags">
+          <Tags
+            classes={{
+              tag: "FullJob__tag",
+              primaryTag: "FullJob__tag _primary",
+            }}
+            primaryTag={props.primaryTag}
+            tags={props.tags}
+            onClick={props.handleTagClick}
+          />
+        </section>
 
         <JobApplyButton applyUrl={props.applyUrl} classes={{ root: "FullJob__applyButton" }} />
-      </section>
-      <section className="FullJob__description">
+      </div>
+      <div className="FullJob__description">
         {description}
         {howToApply}
-      </section>
+      </div>
     </div>
   );
 };

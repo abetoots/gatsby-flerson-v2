@@ -1,14 +1,31 @@
 .JobCard {
   cursor: pointer;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  align-items: center;
-  text-decoration: none;
-  color: black;
   @include paper(1.5rem);
 
+  p,
+  h2,
+  h3 {
+    @apply mb-3;
+    @include media-query($medium-up) {
+      margin: 0;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #6b7280;
+  }
+
+  span {
+    @apply text-gray-900;
+  }
+
   @include media-query($medium-up) {
-    grid-template-columns: max-content 30% 2fr 1fr;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.5rem;
+    align-items: center;
   }
 
   &:visited {
@@ -29,11 +46,6 @@
     background-color: #fffdd0;
   }
 
-  & h2,
-  & h3 {
-    margin: 0;
-  }
-
   &__companyLink {
     color: black;
 
@@ -43,15 +55,13 @@
   }
 
   &__tags {
-    @include media-query($small) {
-      order: 4;
-      grid-column: 2 / 3;
-      font-size: 0.6em;
-    }
-
-    font-size: 0.8em;
+    font-size: 0.6em;
     font-weight: bold;
     cursor: pointer;
+    @apply mb-6;
+    @include media-query($medium-up) {
+      @apply mb-0;
+    }
   }
 
   &__tag {
@@ -59,7 +69,8 @@
     text-transform: uppercase;
     border: 2px solid black;
     padding: 0 4px;
-    margin: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
     background-color: rgba(255, 255, 255, 0.5);
 
     &:hover {
@@ -75,11 +86,6 @@
   }
 
   &__applyButton {
-    @include media-query($small) {
-      order: 3;
-      grid-column: 1 / 2;
-    }
-
     cursor: pointer;
     display: inline-block;
     z-index: 2;

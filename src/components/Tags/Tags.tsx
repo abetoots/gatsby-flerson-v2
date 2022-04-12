@@ -16,7 +16,7 @@ const useStyles = exposeStyles({
 });
 
 export type TagsProps = {
-  classes?: ReturnType<typeof useStyles>;
+  classes?: Partial<ReturnType<typeof useStyles>>;
   primaryTag?: string;
   onClick: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, tag: string, isPrimaryTag: boolean) => void;
   tags: string[];

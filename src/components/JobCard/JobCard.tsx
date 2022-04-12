@@ -76,26 +76,31 @@ const JobCard = (props: JobCardProps) => {
         role="link"
         style={rootStyle}
       >
-        {image}
+        <section>{image}</section>
 
-        <div>
+        <section>
           <h3 className={styles.JobCard__companyName}>{companyName}</h3>
           <h2>{props.jobPosition}</h2>
-          <span style={{ fontSize: ".8em" }}>Accepts: {props.location}</span>
-        </div>
+          <p>
+            Accepts: <span>{props.location}</span>
+          </p>
+        </section>
 
-        <Tags
-          classes={{
-            root: styles.JobCard__tags,
-            tag: styles.JobCard__tag,
-            primaryTag: `${styles.JobCard__tag} ${styles._primary}`,
-          }}
-          primaryTag={props.primaryTag}
-          tags={props.tags}
-          onClick={props.handleTagClick}
-        />
+        <section className={styles.JobCard__tags}>
+          <Tags
+            classes={{
+              tag: styles.JobCard__tag,
+              primaryTag: `${styles.JobCard__tag} ${styles._primary}`,
+            }}
+            primaryTag={props.primaryTag}
+            tags={props.tags}
+            onClick={props.handleTagClick}
+          />
+        </section>
 
-        <JobApplyButton applyUrl={props.applyUrl} classes={{ root: styles.JobCard__applyButton }} />
+        <section>
+          <JobApplyButton applyUrl={props.applyUrl} classes={{ root: styles.JobCard__applyButton }} />
+        </section>
       </div>
     </Focus>
   );

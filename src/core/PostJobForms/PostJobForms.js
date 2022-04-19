@@ -181,11 +181,11 @@ const PostJobForms = (props) => {
               <h2 className="PostJobForms__heading">Job Card Preview</h2>
               <JobCard
                 isPreview
-                customHighlight={!!brandColor.hex ? brandColor.hex : formValues[constants.ADD_ONS].includes(constants.NORMAL_HIGHLIGHT)}
+                highlight={!!brandColor.hex ? brandColor.hex : formValues[constants.ADD_ONS].includes(constants.NORMAL_HIGHLIGHT)}
                 employerName={formValues[constants.EMPLOYER_NAME]}
                 employerWebsite={formValues[constants.EMPLOYER_WEBSITE]}
                 renderImage={(noImage) => {
-                  if (formValues[constants.EMPLOYER_LOGO][0]?.url) {
+                  if (formValues[constants.EMPLOYER_LOGO][0]?.url && formValues[constants.ADD_ONS].includes(constants.SHOW_LOGO)) {
                     return <Preview url={formValues[constants.EMPLOYER_LOGO][0].url} />;
                   } else {
                     return noImage;
@@ -196,7 +196,6 @@ const PostJobForms = (props) => {
                 location={formValues[constants.LOCATION]}
                 handleTagClick={() => null}
                 primaryTag={formValues[constants.CATEGORY].value}
-                showImage={formValues[constants.ADD_ONS].includes(constants.SHOW_LOGO)}
                 tags={formValues[constants.EXTRA_TAGS] && formValues[constants.EXTRA_TAGS].split(", ")}
               />
             </div>

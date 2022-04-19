@@ -8,22 +8,22 @@ export const VALID_UNTIL = "validUntil";
 export const PAYMENT_EMAIL = "paymentEmail";
 
 //Job post
-export const DESCRIPTION = "jobDescription";
-export const POSITION = "position";
+export const DESCRIPTION = "contentMain";
+export const POSITION = "title";
 export const LOCATION = "location";
-export const PRIMARY_TAG = "primaryTag";
-export const EXTRA_TAGS = "extraTags";
-export const EMPLOYMENT_TYPE = "empType";
+export const CATEGORY = "category";
+export const EXTRA_TAGS = "tags";
+export const EMPLOYMENT_TYPE = "employmentType";
 export const SALARY = "salary";
 export const SALARY_MAX = "salaryMax";
 export const SALARY_TYPE = "salaryType";
 export const APPLY_URL = "applyUrl";
 export const APPLY_EMAIL = "applyEmail";
-export const HOW_TO_APPLY = "howToApply";
-export const EMPLOYER_NAME = "employerName";
-export const EMPLOYER_LOGO = "employerLogo";
-export const EMPLOYER_WEBSITE = "employerWebsite";
-export const EMPLOYER_TYPE = "employerType";
+export const HOW_TO_APPLY = "contentHow";
+export const EMPLOYER_NAME = "recruiter";
+export const EMPLOYER_LOGO = "featuredImage";
+export const EMPLOYER_WEBSITE = "website";
+export const EMPLOYER_TYPE = "type";
 
 //Job add ons
 export const NORMAL_HIGHLIGHT = "highlight";

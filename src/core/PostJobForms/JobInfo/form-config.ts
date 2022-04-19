@@ -11,7 +11,7 @@ import {
   EXTRA_TAGS,
   LOCATION,
   POSITION,
-  PRIMARY_TAG,
+  CATEGORY,
   SALARY,
   SALARY_MAX,
   SALARY_TYPE,
@@ -55,7 +55,7 @@ export const jobInfoInputs: InputGroupConfig[] = [
     initialValue: "Worldwide",
   },
   {
-    key: PRIMARY_TAG,
+    key: CATEGORY,
     description: "Choose a primary category associated with a filter in the home page",
     elType: "select",
     elementConfig: {

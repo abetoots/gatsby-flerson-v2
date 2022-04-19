@@ -13,7 +13,7 @@ import {
   EXTRA_TAGS,
   LOCATION,
   POSITION,
-  PRIMARY_TAG,
+  CATEGORY,
   SALARY,
   SALARY_MAX,
   SALARY_TYPE,
@@ -82,7 +82,7 @@ const Preview = () => {
         addOns={formValues[ADD_ONS]}
         applyUrl=""
         employerName={formValues[EMPLOYER_NAME]}
-        employmentType={startCase(formValues[EMPLOYMENT_TYPE].value.replace("-", " "))}
+        employmentType={formValues[EMPLOYMENT_TYPE].label}
         handleTagClick={() => {}}
         renderImage={(noImage) => {
           if (formValues[EMPLOYER_LOGO][0]) {
@@ -93,7 +93,7 @@ const Preview = () => {
         }}
         jobPosition={formValues[POSITION]}
         location={formValues[LOCATION]}
-        primaryTag={formValues[PRIMARY_TAG].value.replace("-", " ")}
+        primaryTag={formValues[CATEGORY].value.replace("-", " ")}
         salary={formValues[SALARY_MAX] ? `${formValues[SALARY]} - ${formValues[SALARY_MAX]}` : formValues[SALARY]}
         salaryType={salaryType}
         description={parse(serialize(jobDescEditor))}

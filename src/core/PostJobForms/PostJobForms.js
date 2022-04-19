@@ -195,7 +195,7 @@ const PostJobForms = (props) => {
                 jobPosition={formValues[constants.POSITION]}
                 location={formValues[constants.LOCATION]}
                 handleTagClick={() => null}
-                primaryTag={formValues[constants.PRIMARY_TAG].value}
+                primaryTag={formValues[constants.CATEGORY].value}
                 showImage={formValues[constants.ADD_ONS].includes(constants.SHOW_LOGO)}
                 tags={formValues[constants.EXTRA_TAGS] && formValues[constants.EXTRA_TAGS].split(", ")}
               />

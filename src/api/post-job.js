@@ -4,7 +4,7 @@ import {
   EMPLOYER_TYPE,
   LOCATION,
   POSITION,
-  PRIMARY_TAG,
+  CATEGORY,
   SALARY,
   SALARY_TYPE,
   EMPLOYER_LOGO,
@@ -42,8 +42,8 @@ const handler = async (req, res) => {
     if (!req.body[LOCATION]) {
       return res.status(422).json(LOCATION + " field is required");
     }
-    if (!req.body[PRIMARY_TAG]) {
-      return res.status(422).json(PRIMARY_TAG + " field is required");
+    if (!req.body[CATEGORY]) {
+      return res.status(422).json(CATEGORY + " field is required");
     }
     if (!req.body[EMPLOYER_TYPE]) {
       return res.status(422).json(EMPLOYER_TYPE + " field is required");

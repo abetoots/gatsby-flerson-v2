@@ -29,41 +29,36 @@ exports.createPages = async ({ actions, graphql }) => {
     component: path.resolve(__dirname, "src/pages/index.js"),
   });
 
-  //   const jobPostTemplate = path.resolve(__dirname, "src/templates/job-post.js");
+  const jobPostTemplate = path.resolve(__dirname, "src/templates/job-post.js");
 
-  //   const result = await graphql(/* GraphQL */ `
-  //     query GET_JOB_POST_NODES {
-  //       allWpJobPost {
-  //         nodes {
-  //           author {
-  //             node {
-  //               slug
-  //             }
-  //           }
-  //           databaseId
-  //           id
-  //         }
-  //       }
-  //     }
-  //   `);
+  const result = await graphql(/* GraphQL */ `
+    query GET_JOB_POST_NODES {
+      allMongodbEngineJobs {
+        nodes {
+          jobId
+          hiringInfo {
+            slug
+          }
+        }
+      }
+    }
+  `);
 
-  //   if (result.errors) {
-  //     throw result.errors;
-  //   }
+  if (result.errors) {
+    throw result.errors;
+  }
 
-  //   const jobPosts = result.data.allWpJobPost.nodes;
-
-  //   jobPosts.forEach((post) => {
-  //     createPage({
-  //       component: jobPostTemplate,
-  //       path: `${post.author.node.slug}/${post.databaseId}`, //ex: flerson/88
-  //       context: {
-  //         // Data passed to context is available
-  //         // in page queries as GraphQL variables.
-  //         id: post.id,
-  //       },
-  //     });
-  //   });
+  result.data.allMongodbEngineJobs.nodes.forEach((post) => {
+    createPage({
+      component: jobPostTemplate,
+      path: `/${post.hiringInfo.slug}/${post.jobId}`, //ex: flerson/88
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        id: post.jobId,
+      },
+    });
+  });
 };
 
 const FilterWarningsPlugin = require("webpack-filter-warnings-plugin");

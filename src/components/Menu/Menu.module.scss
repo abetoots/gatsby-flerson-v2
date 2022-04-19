@@ -1,0 +1,31 @@
+.Menu {
+    $self: &;
+
+    &._desktopOnly {
+        display: none;
+
+        @include media-query($medium-up) {
+            display: block;
+        }
+    }
+
+    &._hidden {
+        @include visually-hidden;
+
+        &:focus-within {
+            @include visually-shown;
+        }
+    }
+
+    &__ul {
+        list-style: none;
+        margin: 0;
+        padding: 1rem;
+
+        &._horizontal {
+            display: flex;
+            align-items: center;
+        }
+    }
+
+}

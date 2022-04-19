@@ -1,0 +1,27 @@
+:root {
+  --theme-primary-color: #f7901e;
+  --theme-color-2: #4392f1;
+  --theme-color-3: #dc493a;
+  --theme-bg-2: #d2dff5;
+  --theme-bg-3: #fcc3a8;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+div {
+  overflow: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  @apply mb-6;
+}

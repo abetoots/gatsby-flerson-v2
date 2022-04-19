@@ -1,3 +1,14 @@
+const path = require("path");
+const tailwindcss = require("tailwindcss");
+const tailwindNesting = require("tailwindcss/nesting");
+const postcssImport = require("postcss-import");
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+});
+
+console.log("process", process.env);
+
 module.exports = {
   siteMetadata: {
     title: `Remote Job Board | Flerson`,
@@ -12,17 +23,19 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-        //When using data, it is recommended that you use this.
-        includePaths: [
-          path.resolve(__dirname, "src/sass/util/_variables.scss"),
-          path.resolve(__dirname, "src/sass/tools/_functions.scss"),
-          path.resolve(__dirname, "src/sass/tools/_mixins.scss"),
-        ],
+        postCssPlugins: [postcssImport(), tailwindNesting(), tailwindcss()],
+        sassOptions: {
+          includePaths: [
+            path.resolve(__dirname, "src/sass/util/_variables.scss"),
+            path.resolve(__dirname, "src/sass/tools/_functions.scss"),
+            path.resolve(__dirname, "src/sass/tools/_mixins.scss"),
+          ],
+        },
         //only variables and mixins to avoid duplicating
-        data: `
-            @import "./src/sass/util/variables";
-            @import "./src/sass/tools/functions";
-            @import "./src/sass/tools/mixins";
+        additionalData: `
+            @use "./src/sass/util/variables" as *;
+            @use "./src/sass/tools/functions" as *;
+            @use "./src/sass/tools/mixins" as *;
             `,
       },
     },
@@ -42,7 +55,7 @@ module.exports = {
           "@Images": path.resolve(__dirname, "src/images/"),
           "@Components": path.resolve(__dirname, "src/components/"),
           "@Core": path.resolve(__dirname, "src/core/"),
-          "@Hoc": path.resolve(__dirname, "src/hoc/"),
+          "@Hoc": path.resolve(__dirname, "src/components/hoc/"),
           "@Index": path.resolve(__dirname, "src/"),
           "@Shared": path.resolve(__dirname, "src/shared/"),
         },
@@ -58,6 +71,29 @@ module.exports = {
       },
     },
     "gatsby-plugin-netlify",
+    "gatsby-plugin-graphql-loader",
+    {
+      resolve: `gatsby-source-mongodb`,
+      options: {
+        dbName: `engine`,
+        collection: [`jobs`],
+        server: {
+          address: "cluster0-shard-00-01.lmx4n.mongodb.net",
+          port: 27017,
+        },
+        auth: {
+          user: process.env.MONGODB_USERNAME,
+          password: process.env.MONGODB_PASS,
+        },
+        extraParams: {
+          replicaSet: "atlas-m3njxt-shard-0",
+          authSource: "admin",
+          ssl: true,
+          retryWrites: true,
+          w: "majority",
+        },
+      },
+    },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {

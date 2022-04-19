@@ -1,0 +1,66 @@
+.Checkbox {
+  $inputWidth: 30px;
+  $inputMargin: 5px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+
+  &__legend {
+    @apply sr-only;
+  }
+
+  &__inputWrap {
+    padding: 0.125rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &._focused {
+      outline: 1px solid #4285f4;
+    }
+  }
+
+  &__description {
+    font-size: 0.8em;
+    color: rgb(129, 129, 129);
+    font-style: italic;
+    margin-left: calc($inputWidth + $inputMargin * 2);
+    margin-bottom: 0.5rem;
+    flex-basis: 100%;
+  }
+
+  &__input {
+    cursor: pointer;
+    position: relative;
+    appearance: none;
+    width: $inputWidth;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    border: 1.5px solid rgb(209, 213, 219);
+    outline: none;
+    vertical-align: middle;
+    margin: 0 $inputMargin;
+    -webkit-appearance: none;
+
+    &:checked {
+      background-color: rgb(164, 238, 164);
+
+      &::after {
+        content: "✔️";
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        font-size: inherit;
+      }
+    }
+  }
+
+  &__label {
+    font-size: medium;
+    cursor: pointer;
+    color: rgb(129, 129, 129);
+  }
+}

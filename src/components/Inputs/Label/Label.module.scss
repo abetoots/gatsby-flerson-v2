@@ -1,0 +1,19 @@
+.Label {
+  @apply mb-2;
+
+  &._withCornerHint {
+    @apply flex justify-between;
+  }
+
+  &__labelEl {
+    @apply block text-sm font-bold text-gray-700;
+  }
+
+  &__required {
+    @apply text-red-500;
+  }
+
+  &__cornerText {
+    @apply text-sm text-gray-500;
+  }
+}

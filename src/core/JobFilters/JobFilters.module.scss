@@ -1,0 +1,108 @@
+.JobFilters {
+  display: none;
+  @include paper();
+
+  &._show {
+    display: block;
+  }
+
+  @include media-query($medium-up) {
+    display: grid;
+    grid-template-columns: 60% 2fr 1fr;
+    align-items: center;
+  }
+
+  &__categoriesLi,
+  &__empTypesLi,
+  &__filterButton {
+    @include fluid-type(320px, 1440px, 12px, 15px, "font-size");
+  }
+
+  &__empTypesLi,
+  &__categoriesLi {
+    margin-bottom: 0;
+  }
+
+  &__categoriesImage,
+  &__categoriesInput {
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+  }
+
+  //categories form
+  &__categories {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem 0.5rem;
+    align-items: center;
+
+    @include media-query($large-up) {
+      grid-template-columns: repeat(auto-fit, minmax(100px, max-content));
+    }
+  }
+
+  &__categoriesLi {
+    width: 100px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  &__categoriesImage {
+    position: absolute;
+    z-index: 1;
+  }
+
+  &__categoriesInput {
+    z-index: 2;
+    outline: none;
+    position: relative;
+    -webkit-appearance: none;
+
+    &::after {
+      background-color: white;
+      border: 1.5px solid rgb(17, 16, 16);
+      border-radius: 5px;
+
+      content: "";
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      top: -5px;
+      right: -5px;
+      text-align: center;
+    }
+
+    &:checked {
+      &::after {
+        background-color: rgb(164, 238, 164);
+        content: "✔️";
+        font-size: 9px;
+      }
+    }
+  }
+
+  //filters submit button
+  &__filterButton {
+    width: 100%;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    border: 2px solid v(theme-color-2);
+    border-radius: 4px;
+    background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+    color: #4392f1;
+    height: 40px;
+    padding: 0 15px;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background-color: v(theme-bg-2);
+    }
+  }
+}

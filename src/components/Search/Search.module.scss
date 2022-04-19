@@ -1,0 +1,38 @@
+.Search {
+  box-sizing: border-box;
+  position: relative;
+
+  &__label {
+    &._hidden {
+      @include visually-hidden;
+    }
+  }
+
+  &__wrap {
+    position: relative;
+  }
+
+  &__input {
+    box-sizing: border-box;
+    width: 100%;
+    background: transparent;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  &__buttonIcon {
+    height: fit-content;
+    display: flex;
+  }
+
+  &__button {
+    background-color: transparent;
+    border: 0;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}

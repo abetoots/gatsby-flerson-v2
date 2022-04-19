@@ -1,0 +1,33 @@
+.Preview {
+  &__header {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 10% 1fr;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__fullJobWrap {
+    background-color: #e2e8f0;
+    padding: 1.5rem 0;
+  }
+
+  &__backButton {
+    height: 100%;
+    width: 50%;
+    width: max-content;
+    background-color: white;
+    border: 2px solid v(theme-primary-color);
+    border-radius: 5px;
+
+    & > div {
+      font-size: 0.7em;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    &:hover {
+      border: 2px solid black;
+    }
+  }
+}

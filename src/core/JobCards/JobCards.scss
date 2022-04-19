@@ -1,0 +1,7 @@
+.JobCards {
+    margin: 0 auto;
+
+    @include media-query($medium-up) {
+        max-width: 900px;
+    }
+}

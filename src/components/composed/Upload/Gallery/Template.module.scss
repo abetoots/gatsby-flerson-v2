@@ -1,0 +1,85 @@
+.Template {
+  $self: &;
+  display: block !important;
+
+  @apply p-1 w-1/2 sm:w-1/3 md:w-1/4 h-24;
+
+  &__previewWrap {
+    @apply w-full h-full rounded-md focus:outline-none bg-gray-100 cursor-pointer relative shadow-sm;
+
+    &._hasImage {
+      @apply text-transparent;
+      &:hover {
+        @apply text-white;
+        #{$self}__overlay {
+          background-color: rgba(5, 5, 5, 0.4);
+        }
+        #{$self}__button {
+          &:hover {
+            background: rgba(5, 5, 5, 0.45);
+          }
+        }
+      }
+    }
+
+    &._hasFile {
+      &:hover {
+        color: #2b6cb0;
+      }
+    }
+  }
+
+  &__preview {
+    @apply w-full h-full sticky object-cover rounded-md bg-fixed;
+  }
+
+  &__overlay {
+    @apply flex flex-col rounded-md text-xs break-words w-full h-full z-20 absolute top-0 py-2 px-3;
+  }
+
+  &__overlayHeading {
+    @apply flex-1;
+  }
+
+  &__overlayItemsWrap {
+    display: flex;
+    flex-wrap: wrap-reverse;
+  }
+
+  &__overlayIcon {
+    @apply p-1;
+    &._hasFile {
+      @apply text-blue-800;
+    }
+
+    svg {
+      @apply fill-current w-4 h-4 ml-auto pt-1;
+    }
+  }
+
+  &__overlayText {
+    @apply p-1 text-xs;
+    &._hasFile {
+      @apply text-gray-700;
+    }
+  }
+
+  &__button {
+    @apply ml-auto focus:outline-none p-1 rounded-md;
+
+    &:hover {
+      @apply bg-gray-300;
+    }
+
+    &._hasFile {
+      @apply text-gray-800;
+    }
+
+    > svg {
+      @apply pointer-events-none fill-current w-4 h-4 ml-auto;
+      > path {
+        @apply pointer-events-none;
+      }
+    }
+  }
+}

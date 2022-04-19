@@ -1,0 +1,75 @@
+.PostJobForms {
+  margin: 0 1.5rem;
+
+  @include media-query($large-up) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  &__status {
+    padding: 1rem;
+    position: fixed;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 auto;
+    opacity: 0;
+    transition: top 0.3s ease, opacity 0.3s ease;
+    z-index: 100;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 15px;
+    box-shadow: 5px 5px 20px rgba(#cbcdd3, 10%);
+    perspective: 40px;
+
+    &._animate {
+      top: 20px;
+      opacity: 1;
+    }
+
+    &._success {
+      border: 2px solid #99dbb4;
+      background-color: #b0db7d;
+    }
+
+    &._error {
+      border: 2px solid v(theme-color-3);
+      background-color: v(theme-bg-3);
+    }
+  }
+
+  &__slot {
+    &._1 {
+      @include paper;
+    }
+
+    &._2 {
+      > div {
+        @include paper;
+        margin-bottom: 1.5rem;
+      }
+    }
+  }
+
+  &__heading {
+    text-align: center;
+  }
+
+  &__submitBtn {
+    width: 100%;
+    text-transform: uppercase;
+    padding: 1rem;
+    font-size: 1.5em;
+    font-weight: bold;
+    border-radius: 5px;
+    color: black;
+    border: 2px solid rgb(238, 99, 6);
+    background-color: rgb(238, 99, 6);
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}

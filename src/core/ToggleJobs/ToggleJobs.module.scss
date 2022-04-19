@@ -1,0 +1,42 @@
+.ToggleJobs {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  &__button {
+    border: none;
+    background-color: white;
+    cursor: pointer;
+
+    &._all {
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+    }
+
+    &._companies {
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+    }
+
+    &._single {
+      border-top: 2px solid black;
+      border-bottom: 2px solid black;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
+
+    &._active {
+      background-color: v(theme-primary-color);
+    }
+
+    &:hover {
+      background-color: v(theme-bg-2);
+    }
+  }
+}

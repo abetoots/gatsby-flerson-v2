@@ -15,8 +15,6 @@ const useStyles = exposeStyles({
   },
 });
 
-console.log("styles", styles);
-
 export type ButtonClasses = Partial<ReturnType<typeof useStyles>>;
 
 type ButtonProps = React.PropsWithChildren<{

@@ -114,7 +114,7 @@ const Checkbox = ({ options = [], labelAccessor = "label", valueAccessor = "valu
           return (
             <div key={value} className={isFocused === index ? `${classes.inputWrap} ${classes._focused}` : classes.inputWrap}>
               {props.renderBeforeInput ? props.renderBeforeInput(option) : null}
-              <Focus run={(isFocused) => (isFocused ? setIsFocused(index) : null)} keyBoardOnly={props.keyboardFocusOnly}>
+              <Focus run={(isFocused) => (isFocused ? setIsFocused(index) : setIsFocused(NaN))} keyBoardOnly={props.keyboardFocusOnly}>
                 <input
                   id={value}
                   className={classes.input}

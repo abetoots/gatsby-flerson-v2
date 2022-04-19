@@ -1,23 +1,42 @@
-import React from "react";
-
 //Components
 import FullJob from "@Components/FullJob/FullJob";
-import SEO from "@Components/seo";
 import Layout from "@Components/layout";
-
+import SEO from "@Components/seo";
+import {
+  ADD_ONS,
+  DESCRIPTION,
+  EMPLOYER_LOGO,
+  EMPLOYER_NAME,
+  EMPLOYMENT_TYPE,
+  EXTRA_TAGS,
+  LOCATION,
+  POSITION,
+  CATEGORY,
+  SALARY,
+  SALARY_MAX,
+  VALUE_HOUR,
+  VALUE_MONTH,
+  VALUE_YEAR,
+  APPLY_URL,
+  APPLY_EMAIL,
+  SALARY_TYPE,
+  EMPLOYER_WEBSITE,
+  VALID_UNTIL,
+  HOW_TO_APPLY,
+} from "@Shared/utils/constants";
+import ImagePreview from "@Components/composed/Upload/Preview/Preview";
+import { graphql, navigate } from "gatsby";
 //Misc
 import parse from "html-react-parser";
-import { graphql, navigate } from "gatsby";
+import React from "react";
 
-import { VALUE_HOUR, VALUE_MONTH, VALUE_YEAR } from "@Shared/utils/constants";
-
-const JobPost = (props) => {
-  const postData = props.data.wpJobPost;
+const JobPost = ({ data }) => {
+  const postData = data.mongodbEngineJobs;
 
   console.log(postData);
 
-  const description = postData.content ? parse(postData.content) : "";
-  const howToApply = postData.howToApply ? parse(postData.howToApply) : "";
+  const description = postData[DESCRIPTION] ? parse(postData[DESCRIPTION]) : "";
+  const howToApply = postData[HOW_TO_APPLY] ? parse(postData[HOW_TO_APPLY]) : "";
 
   let salaryType;
   switch (postData.salaryType) {
@@ -36,43 +55,36 @@ const JobPost = (props) => {
 
   const tagClickHandler = (e, tag, isPrimary) => {
     e.stopPropagation(); //prevent parent's click handler
-    isPrimary
-      ? navigate(`/filter?category=${tag}`)
-      : navigate(`/filter?tag=${tag}`);
+    isPrimary ? navigate(`/filter?category=${tag}`) : navigate(`/filter?tag=${tag}`);
   };
 
   return (
-    <Layout mainStyle={{ marginBottom: "2rem" }}>
-      <SEO title={`${postData.hiringInfo.name} - ${postData.title} | Flerson`}>
+    <Layout mainStyle={{ backgroundColor: "#e2e8f0", padding: "1.5rem 0" }}>
+      <SEO title={`${postData.hiringInfo[EMPLOYER_NAME]} - ${postData[POSITION]} | Flerson`}>
         <script type="application/ld+json">{`
         {
             "@context": "https://schema.org/",
             "@type": "JobPosting",
-            "title": "${postData.title}",
-            "description": "${postData.content}",
+            "title": "${postData[POSITION]}",
+            "description": "${postData[DESCRIPTION]}",
             "identifier": {
                 "@type": "PropertyValue",
-                "name": "${postData.hiringInfo.name}",
-                "value": "${postData.databaseId}"
+                "name": "${postData.hiringInfo[EMPLOYER_NAME]}",
+                "value": "${postData.jobId}"
             },
-            "datePosted": "${postData.date}",
-            "validThrough": "${postData.validUntil}",
+            "datePosted": "${postData.created}",
+            "validThrough": "${postData[VALID_UNTIL]}",
             "applicantLocationRequirements": {
                 "@type": "Country",
-                "name": "${postData.location.toUpperCase() || "WORLDWIDE"}"
+                "name": "${postData[LOCATION].toUpperCase()}"
             },
             "jobLocationType": "TELECOMMUTE",
-            "employmentType": "${postData.employmentTypes.nodes[0].name}",
+            "employmentType": "${postData[EMPLOYMENT_TYPE].label}",
             "hiringOrganization": {
                 "@type": "Organization",
-                "name": "${postData.hiringInfo.name}",
-                "sameAs": "${postData.hiringInfo.website || ""}",
-                "logo": "${
-                  postData.featuredImage
-                    ? postData.featuredImage.localFile.node.childImageSharp
-                        .fluid.src
-                    : ""
-                }"
+                "name": "${postData.hiringInfo[EMPLOYER_NAME]}",
+                "sameAs": "${postData.hiringInfo[EMPLOYER_WEBSITE] || ""}",
+                "logo": "${postData[EMPLOYER_LOGO] ? postData[EMPLOYER_LOGO] : ""}"
             },
             "baseSalary": {
                 "@type": "MonetaryAmount",
@@ -80,109 +92,79 @@ const JobPost = (props) => {
                 "value": {
                     "@type": "QuantitativeValue",
                     ${
-                      postData.salaryMax
+                      postData[SALARY_MAX]
                         ? `
-                        "minValue": ${postData.salary},
-                        "maxValue": ${postData.salaryMax}
+                        "minValue": ${postData[SALARY]},
+                        "maxValue": ${postData[SALARY_MAX]}
                         `
-                        : `"value": ${postData.salary}`
+                        : `"value": ${postData[SALARY]}`
                     }
-                    "unitText": "${postData.salaryType}"
+                    "unitText": "${postData[SALARY_TYPE]}"
                 }
             }
         }`}</script>
       </SEO>
       <FullJob
-        addOns={postData.addOns}
-        image={
-          postData.featuredImage
-            ? {
-                fluid:
-                  postData.featuredImage.node.localFile.childImageSharp.fluid,
-              }
-            : null
-        }
-        employerUrl={postData.hiringInfo.website || null}
-        description={description}
+        addOns={postData[ADD_ONS]}
+        applyUrl={postData[APPLY_URL] ? postData[APPLY_URL] : postData[APPLY_EMAIL]}
+        employerName={postData.hiringInfo[EMPLOYER_NAME]}
+        employmentType={postData[EMPLOYMENT_TYPE].label}
         handleTagClick={tagClickHandler}
-        howToApply={howToApply}
-        location={postData.location || ""}
-        salary={
-          postData.salaryMax
-            ? `${postData.salary} - ${postData.salaryMax}`
-            : `${postData.salary}`
-        }
+        renderImage={(noImage) => {
+          if (postData[EMPLOYER_LOGO]) {
+            return <ImagePreview url={postData[EMPLOYER_LOGO]} />;
+          } else {
+            return noImage;
+          }
+        }}
+        jobPosition={postData[POSITION]}
+        location={postData[LOCATION]}
+        primaryTag={postData[CATEGORY].value.replace("-", " ")}
+        salary={postData[SALARY_MAX] ? `${postData[SALARY]} - ${postData[SALARY_MAX]}` : postData[SALARY]}
         salaryType={salaryType}
-        tags={postData.jobTags.nodes.map((tag) => tag.name)}
-        //Always checked by our backend. No need for fallbacks
-        applyUrl={postData.applyUrl}
-        employerName={postData.hiringInfo.name || ""}
-        employmentType={postData.employmentTypes.nodes[0].name}
-        jobPosition={postData.title}
-        primaryTag={postData.jobCategories.nodes[0].name}
+        description={description}
+        howToApply={howToApply}
+        tags={postData[EXTRA_TAGS] ? postData[EXTRA_TAGS].split(",") : []}
       />
     </Layout>
   );
 };
 
+//variable $id is passed down as context from createPage. see gatsby-node.js
 export const query = graphql`
   query FULL_JOB_POST($id: String!) {
-    wpJobPost(id: { eq: $id }) {
+    mongodbEngineJobs(jobId: { eq: $id }) {
       addOns {
         highlight
         showLogo
         stickyMonth
         stickyWeek
-        customHighlight {
-          hex
-        }
+        customHighlight
       }
-      applyUrl
-      content
-      date
-      databaseId
-      employmentTypes {
-        nodes {
-          name
-          slug
-        }
+      created
+      jobId
+      featuredImage
+      employmentType {
+        label
+        value
       }
       hiringInfo {
-        name
+        recruiter
         website
-        isCompany
+        type
       }
-      howToApply
-      jobCategories {
-        nodes {
-          name
-          slug
-        }
+      category {
+        label
+        value
       }
-      jobTags {
-        nodes {
-          slug
-          name
-        }
-      }
+      tags
       location
+      title
       salary
       salaryMax
       salaryType
-      title
-      featuredImage {
-        node {
-          localFile {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_noBase64
-                src
-              }
-            }
-          }
-        }
-      }
-      validUntil
+      contentMain
+      contentHow
     }
   }
 `;

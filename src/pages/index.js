@@ -189,25 +189,23 @@ export const query = graphql`
           customHighlight
         }
         created
-        id
+        jobId
         featuredImage
         employmentType {
-          name
-          id
+          label
+          value
         }
         hiringInfo {
           recruiter
           website
           type
+          slug
         }
         category {
-          name
-          id
+          label
+          value
         }
-        tags {
-          name
-          id
-        }
+        tags
         location
         title
       }

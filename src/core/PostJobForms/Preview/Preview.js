@@ -78,28 +78,30 @@ const Preview = () => {
         </Button>
         <h1 style={{ margin: 0 }}>Preview</h1>
       </div>
-      <FullJob
-        addOns={formValues[ADD_ONS]}
-        applyUrl=""
-        employerName={formValues[EMPLOYER_NAME]}
-        employmentType={formValues[EMPLOYMENT_TYPE].label}
-        handleTagClick={() => {}}
-        renderImage={(noImage) => {
-          if (formValues[EMPLOYER_LOGO][0]) {
-            return <ImagePreview url={formValues[EMPLOYER_LOGO][0].url} />;
-          } else {
-            return noImage;
-          }
-        }}
-        jobPosition={formValues[POSITION]}
-        location={formValues[LOCATION]}
-        primaryTag={formValues[CATEGORY].value.replace("-", " ")}
-        salary={formValues[SALARY_MAX] ? `${formValues[SALARY]} - ${formValues[SALARY_MAX]}` : formValues[SALARY]}
-        salaryType={salaryType}
-        description={parse(serialize(jobDescEditor))}
-        howToApply={parse(serialize(howToApplyEditor))}
-        tags={formValues[EXTRA_TAGS] ? formValues[EXTRA_TAGS].split(",") : []}
-      />
+      <div className={styles.Preview__fullJobWrap}>
+        <FullJob
+          addOns={formValues[ADD_ONS]}
+          applyUrl=""
+          employerName={formValues[EMPLOYER_NAME]}
+          employmentType={formValues[EMPLOYMENT_TYPE].label}
+          handleTagClick={() => {}}
+          renderImage={(noImage) => {
+            if (formValues[EMPLOYER_LOGO][0]) {
+              return <ImagePreview url={formValues[EMPLOYER_LOGO][0].url} />;
+            } else {
+              return noImage;
+            }
+          }}
+          jobPosition={formValues[POSITION]}
+          location={formValues[LOCATION]}
+          primaryTag={formValues[CATEGORY].value.replace("-", " ")}
+          salary={formValues[SALARY_MAX] ? `${formValues[SALARY]} - ${formValues[SALARY_MAX]}` : formValues[SALARY]}
+          salaryType={salaryType}
+          description={parse(serialize(jobDescEditor))}
+          howToApply={parse(serialize(howToApplyEditor))}
+          tags={formValues[EXTRA_TAGS] ? formValues[EXTRA_TAGS].split(",") : []}
+        />
+      </div>
     </div>
   );
 };

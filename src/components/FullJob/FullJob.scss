@@ -1,6 +1,7 @@
 .FullJob {
   @include paper;
   min-height: 80vh;
+  @apply mx-3 xl:mx-32;
 
   p {
     font-size: 14px;
